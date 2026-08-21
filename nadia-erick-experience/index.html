@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO & Identity -->
+    <title>Nadia & Erick — Luxury Wedding Experience</title>
+    <meta name="description" content="El Umbral y La Esencia. Una celebración de amor eterno en Ixtapan de la Sal.">
+    
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet Centralizado -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Modernizr lite -->
+    <script>document.documentElement.classList.remove('no-js');</script>
+</head>
+<body>
+
+    <!-- =========================================
+         LOADER STATE (PREP)
+         ========================================= -->
+    <div class="loader-screen" aria-hidden="true"></div>
+
+    <!-- =========================================
+         UI LAYER: GLOBAL COMPONENTS
+         ========================================= -->
+    
+    <!-- Audio Opt-in -->
+    <div class="audio-ui-layer" id="audioContainer">
+        <button id="audio-toggle" class="audio-ui-btn" aria-label="Activar o desactivar música de fondo" disabled>
+            <span class="audio-icon" aria-hidden="true">
+                <svg class="icon-muted" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 12A4.5 4.5 0 0 0 14 8v2.18l2.45 2.45c.03-.21.05-.42.05-.63m2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.79 8.79 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71M4.27 3L3 4.27L7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a10.94 10.94 0 0 0 3.69-1.81L19.73 21L21 19.73L4.27 3M12 4L9.91 6.09L12 8.18V4Z"/></svg>
+                <svg class="icon-playing" viewBox="0 0 24 24" style="display:none;"><path fill="currentColor" d="M3 9h4l5-5v16l-5-5H3V9m11 3A4.5 4.5 0 0 1 12 7.82v8.36A4.5 4.5 0 0 1 14 12m0-8.23V5.81C17.11 6.67 19.5 9.54 19.5 13s-2.39 6.33-5.5 7.19v2.06c4.22-.9 7.5-4.66 7.5-9.25S18.22 4.67 14 3.77Z"/></svg>
+            </span>
+            <span class="audio-text font-meta">Audio</span>
+        </button>
+        <audio id="ambient-track" loop preload="auto">
+            Ops, tu navegador no soporta audio.
+        </audio>
+    </div>
+
+    <!-- Halo ambiental fotográfico Ch1 (Replicado de maqueta, fuera del container) -->
+    <div class="ambient-glow" id="ambientLight" aria-hidden="true"></div>
+
+    <!-- =========================================
+         SPA CONTAINER
+         ========================================= -->
+    <div id="app-container">
+
+        <!-- =========================================
+             CHAPTER I: THE THRESHOLD (Hero) - fidelidad replicada
+             ========================================= -->
+        <main class="hero-container" id="heroContainer">
+            <section id="chapter-one" class="hero-section" aria-label="El Umbral">
+                
+                <!-- ÁREA VECTORIAL: APERTURA EN ROMBO CONCÉNTRICA (Estructura de maqueta) -->
+                <div class="identity-stage">
+                  <svg id="master-svg" viewBox="0 0 1000 1000">
+                    <defs>
+                      <!-- Gradiente Metálico de Alta Fidelidad -->
+                      <linearGradient id="bronze-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#C59B72" />
+                        <stop offset="50%" stop-color="#A67C52" />
+                        <stop offset="100%" stop-color="#5E3F20" />
+                      </linearGradient>
+            
+                      <!-- Máscara de Apertura en Rombo -->
+                      <mask id="mask-dna">
+                        <rect width="1000" height="1000" fill="black" />
+                        <polygon class="diamond-shape" points="500,500 500,500 500,500 500,500" fill="white" />
+                      </mask>
+                    </defs>
+            
+                    <!-- CAPA MAESTRA: THE MOLECULAR AXIS EN ALTA DEFINICIÓN (Contenedor prep para JS) -->
+                    <g id="dna-layer" mask="url(#mask-dna)">
+                      <g id="dna-path-container" transform="translate(155.25, 100) scale(0.5)">
+                        <!-- Path inyectado vía JS js/svg-assets.js -->
+                      </g>
+                    </g>
+            
+                    <!-- CAPA DE CORTE: ANILLOS DE ENERGÍA EN ROMBO -->
+                    <polygon id="cutting-diamond" class="diamond-shape" points="500,500 500,500 500,500 500,500" fill="none" stroke="#A67C52" stroke-width="4" stroke-linejoin="round" />
+                    <polygon id="echo-diamond" class="diamond-shape echo-diamond" points="500,500 500,500 500,500 500,500" fill="none" stroke="#C59B72" stroke-width="1.5" stroke-linejoin="round" />
+                  </svg>
+                </div>
+            
+                <!-- BLOQUE EDITORIAL (Estructura de maqueta) -->
+                <div class="editorial-blockeditorial-cascade-wrapper">
+                  <span class="chapter-tag meta-tag font-meta" id="txt-chapter"></span>
+                  <h1 class="couple-names display-title font-display" id="txt-couple"></h1>
+                  <p class="wedding-meta meta-tag font-meta" id="txt-meta"></p>
+                  <div class="line-separator" aria-hidden="true"></div>
+                </div>
+
+                <!-- Indicador de Scroll preservado -->
+                <div class="scroll-indicator font-meta">Deslizar</div>
+
+            </section>
+        </main>
+
+        <!-- =========================================
+             CHAPTER II: THE ESSENCE (Parallax) - PRESERVADO
+             ========================================= -->
+        <section id="chapter-2" class="essence-section" aria-label="La Esencia">
+            <!-- Motor Parallax (Elementos Flotantes) -->
+            <div class="chromatic-block parallax-bg" aria-hidden="true"></div>
+            <div class="chromatic-block parallax-fg" aria-hidden="true"></div>
+
+            <!-- Capa Estructural de Contenido -->
+            <div class="content-layer-essence">
+                <div class="chapter-tag-essence font-meta">Capítulo II &bull; La Esencia</div>
+                
+                <div class="manifesto-text font-display" id="text-trigger-2">
+                    <span class="fade-line-2">El amor más verdadero es aquel que trae paz y equilibrio al alma.</span>
+                    <span class="fade-line-2">Somos dos fuerzas distintas que descubrieron su balance perfecto; eligiendo la empatía, la ternura y la comprensión todos los días.</span>
+                    <span class="fade-line-2">And with that same light, we walk together towards our future.</span>
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- End SPA Container -->
+
+    <!-- CORE LIBRARIES & APP LOGIC -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+/* ============================================================================
+   LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V2.3
+   INTEGRATING: Reset, Tokens, Global, Chapter I (Mockup Fidelity), Chapter II
+   DATE: 2024-05-20 | CODE VERSION: V2.3 (Mockup Hotfix)
+   ============================================================================ */
+
+/* =========================================
+   A. DESIGN TOKENS & CORE RESET
+   ========================================= */
+   :root {
+    /* Color System */
+    --bg-marfil: #F4F0EA;       
+    --bronce-mate: #A67C52;     
+    --bronce-luz: #C59B72;      
+    --bronce-sombra: #5E3F20;   
+    --carbon-suave: #1A1A1A;    
+    --bg-rosa: #E6C6C1;         
+    
+    /* Effects Ch1 - CORREGIDO: Nombres de variables CSS no pueden tener espacios */
+    --glow-color-Ch1: rgba(230, 198, 193, 0.45); 
+    --drop-shadow-Ch1: drop-shadow(0 20px 40px rgba(107, 76, 45, 0.18));
+
+    /* Motion System */
+    --ease-luxury: cubic-bezier(0.65, 0, 0.35, 1);
+    --transition-medium: 0.6s var(--ease-luxury);
+    --transition-slow: 1.2s var(--ease-luxury);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    background-color: var(--bg-marfil);
+    font-size: 16px; 
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden; 
+    overflow-y: auto;  
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+
+    /* Replicado de Maqueta: Perspectiva global para el hero */
+    perspective: 1600px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .chromatic-block, .ambient-glow, .scroll-indicator {
+        display: none !important;
+    }
+}
+
+body {
+    background-color: var(--bg-marfil);
+    color: var(--carbon-suave);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+.font-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.font-meta {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   B. GLOBAL LAYOUT & COMPONENTS
+   ========================================= */
+#app-container {
+    width: 100%;
+    position: relative;
+}
+
+section {
+    width: 100%;
+    min-height: 100vh; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader-screen {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-marfil);
+    z-index: 999;
+    opacity: 1;
+    transition: opacity 0.5s var(--ease-luxury);
+}
+
+.audio-ui-layer {
+    position: fixed;
+    bottom: 2rem; 
+    right: 2rem;
+    z-index: 100; 
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.audio-ui-btn {
+    background: transparent;
+    border: none;
+    color: var(--carbon-suave);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    transition: opacity var(--transition-medium);
+    opacity: 0.6; 
+}
+
+.audio-ui-btn:hover,
+.audio-ui-btn:focus-visible {
+    opacity: 1;
+    outline: none;
+}
+
+.audio-ui-btn:disabled {
+    cursor: wait;
+    opacity: 0.3;
+}
+
+.audio-text {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: currentColor;
+}
+
+.audio-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    color: currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.audio-ui-btn.is-playing .icon-muted { display: none !important; }
+.audio-ui-btn.is-playing .icon-playing { display: block !important; }
+
+
+/* =========================================
+   C. CHAPTER I: THE THRESHOLD (Hero)
+   REPLICADO DE MAQUETA
+   ========================================= */
+
+/* Halo ambiental fotográfico (Asset provisto Ch1) - Fuera del container centrado */
+.ambient-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9); /* Scale replicado de maqueta */
+    width: 720px;
+    height: 720px;
+    border-radius: 50%;
+    /* CORREGIDO: Uso de la variable correcta */
+    background: radial-gradient(circle, var(--glow-color-Ch1) 0%, rgba(244, 240, 234, 0) 70%);
+    pointer-events: none;
+    filter: blur(55px);
+    z-index: 1; 
+}
+
+.hero-container {
+    opacity: 0; /* Hidden initially, revealed by GSAP */
+    
+    /* Replicado de maqueta: El container centrado garantiza la contención visual */
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 460px; /* Crucial para persistencia visual Ch1 */
+    /* CORREGIDO: Auto margin para asegurar el centrado si el flexbox padre falla en algunos contextos */
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#chapter-one {
+    justify-content: center; 
+}
+
+/* --- SVG Identity Stage (Replicado exacto de maqueta) --- */
+.identity-stage {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    margin-bottom: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: var(--drop-shadow-Ch1); /* #A67C52 */
+    z-index: 2;
+}
+
+#master-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible; 
+    shape-rendering: geometricPrecision;
+}
+
+.diamond-shape {
+    /* points will be animated via GSAP */
+}
+
+/* --- Editorial Block (Replicado exacto de maqueta) --- */
+.editorial-block {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none; 
+    width: 100%;
+    /* Spacing Ch1 unificado */
+}
+
+.chapter-tag {
+    color: var(--bronce-mate);
+    font-size: 0.65rem;
+    letter-spacing: 0.45em;
+    margin-bottom: 0.8rem; /* Spacing maqueta */
+    
+    /* GSAP prep: translateY replicado */
+    opacity: 0; 
+    transform: translateY(12px);
+}
+
+.couple-names {
+    font-size: 3.4rem; /* Editorial size maqueta */
+    line-height: 1.05;
+    letter-spacing: 0.03em; /* Maqueta */
+    color: var(--carbon-suave);
+    margin-bottom: 0.9rem; /* Spacing maqueta */
+    
+    /* GSAP prep: translateY replicado */
+    opacity: 0; 
+    transform: translateY(20px);
+}
+
+.wedding-meta {
+    font-size: 0.72rem; /* Maqueta */
+    letter-spacing: 0.35em;
+    color: var(--carbon-suave);
+    
+    /* GSAP prep: translateY replicado */
+    opacity: 0; 
+    transform: translateY(12px);
+}
+
+.line-separator {
+    width: 40px; /* Maqueta */
+    height: 1px;
+    background: var(--bronce-mate);
+    margin: 1.2rem auto 0; /* Spacing maqueta */
+    
+    /* GSAP prep */
+    opacity: 0; 
+    transform: scaleX(0); 
+    transform-origin: center;
+}
+
+/* --- Scroll Indicator (Ch1) --- PRESERVADO de V2.2 Integrated */
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bronce-mate);
+    z-index: 10;
+    opacity: 0; 
+    animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.7; transform: translateX(-50%) translateY(6px); }
+    100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+}
+
+
+/* =========================================
+   D. CHAPTER II: THE ESSENCE (Parallax)
+   PRESERVADO de V2.2 Integrated (Frozen)
+   ========================================= */
+#chapter-2 {
+    padding: 15rem 2rem; 
+    z-index: 2; 
+    background-color: var(--bg-marfil); 
+    overflow: hidden; 
+    pointer-events: none;
+}
+
+.essence-section {
+    pointer-events: auto; 
+}
+
+.chromatic-block {
+    position: absolute;
+    background-color: var(--bg-rosa); 
+    border-radius: 2px;
+    pointer-events: none; 
+}
+
+.parallax-bg {
+    width: 80vw;
+    max-width: 600px;
+    height: 70vh;
+    top: -10%;
+    left: -10%;
+    opacity: 0.25;
+    z-index: 0;
+}
+
+.parallax-fg {
+    width: 40vw;
+    max-width: 300px;
+    height: 40vh;
+    bottom: -20%;
+    right: -5%;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.content-layer-essence {
+    position: relative;
+    z-index: 2; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    background: radial-gradient(circle, rgba(244, 240, 234, 0.92) 40%, rgba(244, 240, 234, 0) 80%);
+}
+
+.chapter-tag-essence {
+    font-size: 0.65rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--bronce-mate);
+    margin-bottom: 6rem;
+}
+
+.manifesto-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3vw, 2.5rem); 
+    line-height: 1.85; 
+    text-align: center;
+    color: var(--carbon-suave);
+}
+
+.manifesto-text span {
+    display: block;
+    margin-bottom: 2.5rem;
+}
+
+.manifesto-text span:last-child {
+    margin-bottom: 0;
+}
