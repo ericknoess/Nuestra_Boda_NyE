@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototipo Interactivo | El Tiempo y Las Coordenadas - V5.0</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-marfil: #F4F0EA;
+      --bronce-mate: #A67C52;
+      --carbon-suave: #1A1A1A;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-marfil); 
+      color: var(--carbon-suave);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Simulador de Capítulos Anteriores */
+    .spacer-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.3;
+    }
+
+    /* CAPÍTULO III: El Tiempo y Las Coordenadas */
+    #chapter-3 {
+      position: relative;
+      width: 100%;
+      height: 200vh; /* Altura extendida para permitir el scroll de dos actos */
+    }
+
+    .sticky-container {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .chapter-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--bronce-mate);
+      position: absolute;
+      top: 15%;
+      z-index: 10;
+    }
+
+    /* Contenedor Gráfico (Boceto y Mapa) */
+    .graphic-anchor {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      opacity: 0.15; /* Sutil para ser monumental pero no invasivo */
+    }
+
+    svg {
+      width: 80vw;
+      max-width: 600px;
+      height: auto;
+      overflow: visible;
+    }
+
+    .sketch-path, .map-path {
+      fill: none;
+      stroke: var(--bronce-mate);
+      stroke-width: 1.5;
+    }
+
+    /* Textos Monumentales */
+    .monumental-text-container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+    }
+
+    .date-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      color: var(--carbon-suave);
+      margin-bottom: 1rem;
+    }
+
+    .location-display {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--carbon-suave);
+      position: absolute;
+      width: 100%;
+      left: 0;
+      opacity: 0; /* Oculto inicialmente */
+      transform: translateY(20px);
+    }
+
+    .time-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.8rem;
+      font-style: italic;
+      color: var(--bronce-mate);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="spacer-section">
+    <p style="font-family: 'Montserrat'; letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.7rem;">Scroll para entrar al Capítulo III</p>
+  </div>
+
+  <section id="chapter-3">
+    <div class="sticky-container">
+      
+      <div class="chapter-tag">Capítulo III &bull; Coordenadas</div>
+
+      <!-- ARTE VECTORIAL -->
+      <div class="graphic-anchor">
+        <svg viewBox="0 0 500 500">
+          <!-- Acto 1: Boceto Abstracto (Simulación de un arco botánico) -->
+          <g id="venue-sketch">
+            <path class="sketch-path" d="M 100 400 C 100 200, 400 200, 400 400" />
+            <path class="sketch-path" d="M 150 400 C 150 250, 350 250, 350 400" />
+            <path class="sketch-path" d="M 250 200 L 250 150" />
+            <!-- Hojas abstractas -->
+            <path class="sketch-path" d="M 120 300 Q 80 280, 100 250 Q 140 270, 120 300" />
+            <path class="sketch-path" d="M 380 300 Q 420 280, 400 250 Q 360 270, 380 300" />
+          </g>
+
+          <!-- Acto 2: Mapa de Coordenadas Abstracto -->
+          <g id="coordinate-map" opacity="0">
+            <!-- Retícula topográfica -->
+            <path class="map-path" d="M 50 250 L 450 250" />
+            <path class="map-path" d="M 250 50 L 250 450" />
+            <circle class="map-path" cx="250" cy="250" r="150" stroke-dasharray="4 8" />
+            <circle class="map-path" cx="250" cy="250" r="100" />
+            <!-- Pin de ubicación -->
+            <circle cx="250" cy="250" r="4" fill="var(--bronce-mate)" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- TEXTOS MONUMENTALES -->
+      <div class="monumental-text-container">
+        
+        <!-- Vista 1: La Fecha -->
+        <div id="date-view">
+          <div class="date-display">21 . 11 . 2026</div>
+          <div class="time-display">Al atardecer</div>
+        </div>
+
+        <!-- Vista 2: El Lugar -->
+        <div id="location-view" class="location-display">
+          Ixtapan de la Sal<br>
+          <span style="font-size: 0.6rem; color: var(--bronce-mate); letter-spacing: 0.2em; display: inline-block; margin-top: 1rem;">Lat 18.8430° N &bull; Long 99.6766° W</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div class="spacer-section"></div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // COREOGRAFÍA DEL CAPÍTULO III
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#chapter-3",
+        start: "top top",      // Inicia cuando el capítulo toca el borde superior
+        end: "+=100%",         // Dura el equivalente a 1 alto de pantalla de scroll
+        scrub: 1,              // Suavizado perfecto vinculado a tu dedo
+        pin: true              // Mantiene la pantalla fija mientras ocurre la animación
+      }
+    });
+
+    tl
+      // 1. Desvanecer la fecha y el boceto botánico
+      .to("#date-view", { opacity: 0, y: -30, duration: 1 }, 0)
+      .to("#venue-sketch", { opacity: 0, scale: 1.1, transformOrigin: "center", duration: 1 }, 0)
+      
+      // 2. Revelar las coordenadas, el nombre del lugar y el mapa
+      .to("#location-view", { opacity: 1, y: 0, duration: 1 }, 0.5)
+      .to("#coordinate-map", { opacity: 1, scale: 1, transformOrigin: "center", duration: 1 }, 0.5);
+
+  </script>
+</body>
+</html>
