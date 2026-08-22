@@ -1,6 +1,6 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.16
- * GSAP MOTION SYSTEM (Ch1 Fast & Crisp, Ch2 Active Read, Ch3 Native Sticky + Scrub Fix)
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.20
+ * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
 import weddingConfig from './config.js';
@@ -9,6 +9,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    // =========================================
+    // 0.5 MOTOR DE INERCIA Y SCROLL SUAVE (LENIS)
+    // =========================================
+    const lenis = new Lenis({
+        duration: 1.2,      
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+        smooth: true,
+        smoothTouch: false  
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0, 0);
+
     // =========================================
     // 0. LOADER
     // =========================================
@@ -95,40 +117,26 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // --- CH3: COORDENADAS (Corrección de Integración SPA: Eliminado pin: true) ---
+        // --- CH3: COORDENADAS (Matemática Estricta con Lenis y Scrub 1.5) ---
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#chapter-3",
                 start: "top top",      
-                end: "bottom bottom",  // Sincronizado perfectamente con los 450vh del CSS
-                scrub: 1              
-                // pin: true           // Eliminado para evitar conflicto con position: sticky del CSS
+                end: "bottom bottom",  
+                scrub: 1.5             
             }
         });
 
         tl
-            // ACTO 1: Inicia la fecha y entra la atmósfera de la iglesia (0 a 1)
             .to("#bg-iglesia", { opacity: 0.25, duration: 1 }, 0)
-            
-            // ACTO 2: La Fecha SE RETIRA (1 a 2)
             .to("#layer-fecha", { opacity: 0, y: -40, duration: 1 }, 1)
-            
-            // ACTO 3: La Ceremonia ENTRA sola, una vez que la fecha ya no está (2 a 3)
             .to("#layer-ceremonia", { opacity: 1, y: 0, duration: 1 }, 2)
-            
-            // ACTO 4: La Ceremonia SE RETIRA junto con la iglesia (4 a 5)
             .to("#layer-ceremonia", { opacity: 0, y: -40, duration: 1 }, 4)
             .to("#bg-iglesia", { opacity: 0, duration: 1 }, 4)
-            
-            // ACTO 5: Entra el Jardín y luego la Recepción (5 a 6.5)
             .to("#bg-jardin", { opacity: 0.25, duration: 1 }, 5)
             .to("#layer-recepcion", { opacity: 1, y: 0, duration: 1 }, 5.5)
-            
-            // MOVIMIENTO DE FONDO CONTINUO (Se reproduce independientemente)
             .to("#bg-iglesia", { scale: 1.06, duration: 5, ease: "none" }, 0)
             .to("#bg-jardin", { scale: 1.06, duration: 4.5, ease: "none" }, 5)
-            
-            // ACTO FINAL: Salida limpia hacia el siguiente capítulo (8 a 9)
             .to("#layer-recepcion", { opacity: 0, y: -40, duration: 1 }, 8)
             .to("#bg-jardin", { opacity: 0, duration: 1 }, 8)
             .to("#ch-tag", { opacity: 0, duration: 1 }, 8);
