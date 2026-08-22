@@ -1,38 +1,47 @@
 /**
- * WEDDING EXPERIENCE - CENTRAL CONFIGURATION V2.0 (SPA Integrated)
- * unifies data for Chapter I
+ * WEDDING EXPERIENCE - CENTRAL CONFIGURATION V3.4 (SPA Integrated)
  */
 
 const weddingConfig = {
 
-    /**
-     * GENERAL PAIR DATA
-     */
     couple: {
         partnerOne: "Nadia",
         partnerTwo: "Erick",
         fullName: "Nadia & Erick",
-        monogramUrl: "#bronze-metallic" // Reference to Ch1 Gradient
+        monogramUrl: "#bronze-metallic" 
     },
 
-    /**
-     * AUDIO SYSTEM (Opt-in)
-     */
     audio: {
-        enabled: true,            // Feature toggle
-        autoplay: false,          // Strictly FALSE by luxury policy
+        enabled: true,            
+        autoplay: false,          
         preload: "auto",
         loop: true,
-        src: "assets/audio/ambient-track.mp3" // [MISSING ASSET]
+        src: "assets/audio/ambient-track.mp3" 
     },
 
-    /**
-     * CHAPTER I: THE THRESHOLD (Hero Section)
-     * Static narrative extracted from provided mockup
-     */
     chapterOne: {
         title: "Capítulo I • El Umbral",
         metaText: "21 . 11 . 2026 • Ixtapan de la Sal"
+    },
+
+    // Datos estructurados del nuevo Capítulo III (V5.9)
+    chapterThree: {
+        tag: "Capítulo III • Coordenadas",
+        date: "21 . 11 . 2026",
+        ceremony: {
+            phase: "La Ceremonia",
+            location: "Iglesia Principal",
+            city: "Ixtapan de la Sal"
+        },
+        reception: {
+            phase: "La Celebración",
+            location: "Finca El Encanto",
+            city: "Recepción y Banquete"
+        },
+        images: {
+            iglesia: "iglesia.jpeg",
+            jardin: "jardin.jpeg"
+        }
     }
 };
 

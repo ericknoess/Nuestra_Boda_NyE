@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototipo Interactivo | Alternativa A: Portal de Diamante</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-marfil: #F4F0EA;
+      --bronce-mate: #A67C52;
+      --carbon-suave: #1A1A1A;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-marfil); 
+      color: var(--carbon-suave);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .spacer-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.3;
+    }
+
+    #chapter-3 {
+      position: relative;
+      width: 100%;
+      height: 250vh; 
+    }
+
+    .sticky-container {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .chapter-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--bronce-mate);
+      position: absolute;
+      top: 10%;
+      z-index: 10;
+    }
+
+    /* Alternativa A: El Portal de Diamante */
+    .diamond-mask {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65vw;
+      max-width: 450px;
+      height: 75vh;
+      max-height: 800px;
+      /* Corte geométrico en forma de rombo perfecto */
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      overflow: hidden;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    .editorial-photo {
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      object-fit: cover;
+      /* Tratamiento tonal intacto para mantener la elegancia */
+      filter: grayscale(100%) sepia(40%) contrast(1.1) brightness(0.9);
+      mix-blend-mode: multiply;
+    }
+
+    .diamond-mask::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--bronce-mate);
+      mix-blend-mode: overlay;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    #photo-finca { z-index: 2; }
+    #photo-iglesia { z-index: 1; opacity: 0; }
+
+    /* Textos Monumentales */
+    .monumental-text-container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .date-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      color: var(--carbon-suave);
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 25px rgba(244, 240, 234, 0.95);
+    }
+
+    .location-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--carbon-suave);
+      position: absolute;
+      width: 100%;
+      left: 0;
+      opacity: 0; 
+      transform: translateY(20px);
+      text-shadow: 0 4px 25px rgba(244, 240, 234, 0.95);
+    }
+
+    .location-details {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--carbon-suave);
+      display: block;
+      margin-top: 1.5rem;
+    }
+
+    .time-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.8rem;
+      font-style: italic;
+      color: var(--bronce-mate);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="spacer-section">
+    <p style="font-family: 'Montserrat'; letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.7rem;">Scroll para entrar al Capítulo III</p>
+  </div>
+
+  <section id="chapter-3">
+    <div class="sticky-container">
+      
+      <div class="chapter-tag">Capítulo III &bull; Coordenadas</div>
+
+      <!-- El Portal de Diamante -->
+      <div class="diamond-mask" id="photo-container">
+        <img src="jardin.jpeg" alt="Finca El Encanto" class="editorial-photo" id="photo-finca">
+        <img src="iglesia.jpeg" alt="Iglesia" class="editorial-photo" id="photo-iglesia">
+      </div>
+
+      <div class="monumental-text-container">
+        <div id="date-view">
+          <div class="date-display">21 . 11 . 2026</div>
+          <div class="time-display">La Celebración</div>
+        </div>
+        <div id="location-view" class="location-display">
+          Ixtapan de la Sal
+          <span class="location-details">Finca El Encanto &bull; Ceremonia Religiosa</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="spacer-section"></div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#chapter-3",
+        start: "top top",      
+        end: "+=150%",         
+        scrub: 1,              
+        pin: true              
+      }
+    });
+
+    tl
+      .to("#photo-finca", { yPercent: 5, duration: 1 }, 0)
+      .to("#date-view", { opacity: 0, y: -40, duration: 1 }, 1)
+      .to("#photo-finca", { opacity: 0, duration: 1 }, 1)
+      .to("#photo-iglesia", { opacity: 1, duration: 1 }, 1.2)
+      .to("#location-view", { opacity: 1, y: 0, duration: 1 }, 1.2)
+      .fromTo("#photo-iglesia", { yPercent: -5 }, { yPercent: 5, duration: 1 }, 1.2);
+  </script>
+</body>
+</html>

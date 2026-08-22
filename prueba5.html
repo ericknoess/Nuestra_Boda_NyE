@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototipo Interactivo | El Tiempo y Las Coordenadas - V5.2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-marfil: #F4F0EA;
+      --bronce-mate: #A67C52;
+      --carbon-suave: #1A1A1A;
+      --rosa-palo: #E6C6C1;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-marfil); 
+      color: var(--carbon-suave);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .spacer-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.3;
+    }
+
+    /* CAPÍTULO III */
+    #chapter-3 {
+      position: relative;
+      width: 100%;
+      height: 250vh; /* Altura extendida para un scroll muy pausado y elegante */
+    }
+
+    .sticky-container {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .chapter-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--bronce-mate);
+      position: absolute;
+      top: 10%;
+      z-index: 10;
+    }
+
+    /* Enmarque Arquitectónico (El Arco) */
+    .arch-mask {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 75vw;
+      max-width: 450px;
+      height: 65vh;
+      max-height: 700px;
+      /* Forma de arco clásico */
+      border-radius: 300px 300px 0 0;
+      overflow: hidden;
+      z-index: 1;
+      opacity: 0.85;
+      /* Sutil borde bronce para dar estructura */
+      border: 1px solid rgba(166, 124, 82, 0.3);
+      border-bottom: none;
+    }
+
+    /* Tratamiento Fotográfico Editorial (Duotono unificado) */
+    .editorial-photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Este filtro convierte cualquier foto en un tono cálido y nostálgico que combina con la invitación */
+      filter: grayscale(100%) sepia(40%) contrast(1.1) brightness(0.9);
+      mix-blend-mode: multiply;
+    }
+
+    /* Tintura para unificar perfectamente con la paleta de la boda */
+    .arch-mask::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--bronce-mate);
+      mix-blend-mode: overlay;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    #photo-finca { z-index: 2; }
+    #photo-iglesia { z-index: 1; opacity: 0; }
+
+    /* Textos Monumentales */
+    .monumental-text-container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .date-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      color: var(--carbon-suave);
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 20px rgba(244, 240, 234, 0.9); /* Halo para asegurar lectura sobre la foto */
+    }
+
+    .location-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--carbon-suave);
+      position: absolute;
+      width: 100%;
+      left: 0;
+      opacity: 0; 
+      transform: translateY(20px);
+      text-shadow: 0 4px 20px rgba(244, 240, 234, 0.9);
+    }
+
+    .location-details {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--carbon-suave);
+      display: block;
+      margin-top: 1.5rem;
+    }
+
+    .time-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.8rem;
+      font-style: italic;
+      color: var(--bronce-mate);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="spacer-section">
+    <p style="font-family: 'Montserrat'; letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.7rem;">Scroll para entrar al Capítulo III</p>
+  </div>
+
+  <section id="chapter-3">
+    <div class="sticky-container">
+      
+      <div class="chapter-tag">Capítulo III &bull; Coordenadas</div>
+
+      <!-- Ventana Arquitectónica con Fotos Reales -->
+      <div class="arch-mask" id="photo-container">
+        <!-- Acto 1: Finca -->
+        <img src="iglesia.jpeg" alt="Finca El Encanto" class="editorial-photo" id="photo-finca">
+        <!-- Acto 2: Iglesia -->
+        <img src="jardin.jpeg" alt="Iglesia" class="editorial-photo" id="photo-iglesia">
+      </div>
+
+      <!-- Textos -->
+      <div class="monumental-text-container">
+        
+        <!-- Vista 1: La Fecha -->
+        <div id="date-view">
+          <div class="date-display">21 . 11 . 2026</div>
+          <div class="time-display">La Celebración</div>
+        </div>
+
+        <!-- Vista 2: El Lugar -->
+        <div id="location-view" class="location-display">
+          Ixtapan de la Sal
+          <span class="location-details">Finca El Encanto &bull; Ceremonia Religiosa</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div class="spacer-section"></div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // COREOGRAFÍA FOTOGRÁFICA
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#chapter-3",
+        start: "top top",      
+        end: "+=150%",         // Scroll largo para que la transición fotográfica sea poética y suave
+        scrub: 1,              
+        pin: true              
+      }
+    });
+
+    tl
+      // 1. Efecto Parallax interno inicial en la foto de la Finca (Opcional, da mucha vida)
+      .to("#photo-finca", { scale: 1.05, duration: 1 }, 0)
+      
+      // 2. Desvanecer la fecha y la foto de la Finca
+      .to("#date-view", { opacity: 0, y: -40, duration: 1 }, 1)
+      .to("#photo-finca", { opacity: 0, duration: 1 }, 1)
+      
+      // 3. Revelar la foto de la Iglesia y los detalles del lugar
+      .to("#photo-iglesia", { opacity: 1, duration: 1 }, 1.2)
+      .to("#location-view", { opacity: 1, y: 0, duration: 1 }, 1.2)
+      
+      // 4. Parallax continuo y sutil a la foto de la iglesia
+      .to("#photo-iglesia", { scale: 1.05, duration: 1 }, 1.2);
+
+  </script>
+</body>
+</html>
