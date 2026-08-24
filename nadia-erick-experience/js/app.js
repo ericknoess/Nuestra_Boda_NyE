@@ -1,6 +1,7 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.28
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.29
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
+ * FIX: Chapter II Scroll Fluidity & Parallax Bounds Calibration
  */
 
 import weddingConfig from './config.js';
@@ -138,16 +139,65 @@ function initSPAAnimations() {
         .to(".scroll-indicator", { opacity: 1, duration: 1.0, ease: "sine.inOut" }, "+=0.1")
         .to("#heroContainer", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, "+=0.1");
 
-    // --- CH2: LA ESENCIA ---
-    gsap.to(".parallax-bg", { y: 150, ease: "none", scrollTrigger: { trigger: "#chapter-2", start: "top bottom", end: "bottom top", scrub: true }});
-    gsap.to(".parallax-fg", { y: -250, ease: "none", scrollTrigger: { trigger: "#chapter-2", start: "top bottom", end: "bottom top", scrub: true }});
-    gsap.fromTo(".content-layer-essence", { y: 30 }, { y: -15, ease: "none", scrollTrigger: { trigger: "#chapter-2", start: "top bottom", end: "bottom top", scrub: true }});
-    gsap.from(".chapter-tag-essence", { scrollTrigger: { trigger: ".content-layer-essence", start: "top 80%" }, y: 20, opacity: 0, duration: 1.5, ease: "power3.out" });
+    // --- CH2: LA ESENCIA (Calibración de Scroll Fluido y Sincronización de Parallax) ---
+    // Optimizamos start/end para que la interpolación abarque exactamente el recorrido natural del contenedor sin saltos
+    gsap.to(".parallax-bg", { 
+        y: 120, 
+        ease: "none", 
+        scrollTrigger: { 
+            trigger: "#chapter-2", 
+            start: "top 90%", 
+            end: "bottom 10%", 
+            scrub: true 
+        }
+    });
+    
+    gsap.to(".parallax-fg", { 
+        y: -180, 
+        ease: "none", 
+        scrollTrigger: { 
+            trigger: "#chapter-2", 
+            start: "top 90%", 
+            end: "bottom 10%", 
+            scrub: true 
+        }
+    });
+    
+    gsap.fromTo(".content-layer-essence", 
+        { y: 20 }, 
+        { 
+            y: -10, 
+            ease: "none", 
+            scrollTrigger: { 
+                trigger: "#chapter-2", 
+                start: "top 90%", 
+                end: "bottom 10%", 
+                scrub: true 
+            }
+        }
+    );
+
+    gsap.from(".chapter-tag-essence", { 
+        scrollTrigger: { 
+            trigger: ".content-layer-essence", 
+            start: "top 80%" 
+        }, 
+        y: 20, 
+        opacity: 0, 
+        duration: 1.5, 
+        ease: "power3.out" 
+    });
 
     gsap.utils.toArray(".fade-line-2").forEach((line) => {
         gsap.from(line, {
-            scrollTrigger: { trigger: line, start: "top center" },
-            y: 35, opacity: 0, duration: 1.5, ease: "power3.out"
+            scrollTrigger: { 
+                trigger: line, 
+                start: "top 85%" 
+            },
+            y: 30, 
+            opacity: 0, 
+            duration: 1.2, 
+            ease: "power3.out"
         });
     });
 
