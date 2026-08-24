@@ -1,11 +1,9 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.22
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.28
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
 import weddingConfig from './config.js';
-
-console.log("⚙️ MOTION CORE INICIADO: Listo para coreografía.");
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,6 +39,7 @@ const enterBtn = document.getElementById('enter-experience');
 const audioTrack = document.getElementById('ambient-track');
 const ceremonialGate = document.getElementById('ceremonial-gate');
 const audioToggleButton = document.getElementById('audio-toggle');
+const audioContainer = document.getElementById('audioContainer');
 
 let isAudioPlaying = false;
 
@@ -69,8 +68,9 @@ if(enterBtn) {
             ease: "power2.inOut",
             onComplete: () => {
                 gsap.set(ceremonialGate, { display: "none" });
-                initSPAAnimations(); // Arranca las animaciones GSAP
-                lenis.start();       // LIBERA EL SCROLL
+                if(audioContainer) audioContainer.classList.add('is-active');
+                initSPAAnimations(); 
+                lenis.start();       
             }
         });
     });
@@ -126,7 +126,9 @@ function initSPAAnimations() {
         .to(".diamond-shape:not(#echo-diamond)", { attr: { points: endPolyCut }, duration: 1.8, ease: "power3.inOut" }, 0)
         .to("#cutting-diamond", { strokeWidth: 0, duration: 1.8, ease: "power3.inOut" }, 0)
         .to("#echo-diamond", { attr: { points: endPolyEcho }, strokeWidth: 0, opacity: 0, duration: 1.8, ease: "power3.out" }, 0)
+        
         .to("#dna-layer", { scale: 1, duration: 1.8, ease: "power3.inOut" }, 0) 
+        .to("#audioContainer", { opacity: 1, duration: 1.8, ease: "power3.inOut" }, 0) 
         
         .to(".chapter-tag", { opacity: 0.85, y: 0, duration: 1.2, ease: "power3.out" }, "-=1.0")
         .to(".couple-names", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }, "-=1.1")
