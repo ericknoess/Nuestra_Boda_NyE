@@ -13,19 +13,14 @@
     
     <style>
        /* ============================================================================
-          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V3.33 (UNIFICADO Y CORREGIDO)
+          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V8.1 (RESPONSIVE FLUID)
           ============================================================================ */
        :root {
            --bg-marfil: #F4F0EA;       
            --bronce-mate: #A67C52;     
-           --bronce-luz: #C59B72;      
-           --bronce-sombra: #5E3F20;   
            --carbon-suave: #1A1A1A;    
-           --bg-rosa: #E6C6C1;         
-           
            --glow-color-Ch1: rgba(230, 198, 193, 0.45); 
            --drop-shadow-Ch1: drop-shadow(0 20px 40px rgba(107, 76, 45, 0.18));
-
            --ease-luxury: cubic-bezier(0.65, 0, 0.35, 1);
            --transition-medium: 0.6s var(--ease-luxury);
        }
@@ -76,118 +71,87 @@
 
        #app-container { width: 100%; position: relative; }
 
-       /* GLOBAL UI & CEREMONIAL GATE */
-       .loader-screen {
-           position: fixed;
-           inset: 0;
-           background-color: var(--bg-marfil);
-           z-index: 9999;
-           opacity: 1;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           flex-direction: column;
-       }
-
-       /* AUDIO UI: Esquina superior izquierda extrema */
-       .audio-ui-layer { 
-           position: fixed; 
-           top: 0.2rem; 
-           left: 0.2rem; 
-           z-index: 100; 
-           pointer-events: none; 
-           opacity: 0; 
-           display: flex; 
-           flex-direction: column; 
-           align-items: center; 
-           gap: 0.2rem; 
-       }
+       /* GLOBAL UI */
+       .loader-screen { position: fixed; inset: 0; background-color: var(--bg-marfil); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+       .audio-ui-layer { position: fixed; top: clamp(0.2rem, 2vw, 1rem); left: clamp(0.2rem, 2vw, 1rem); z-index: 100; pointer-events: none; opacity: 0; display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
        .audio-ui-layer.is-active { pointer-events: auto; }
-
-       .audio-ui-btn { 
-           background: transparent; 
-           border: none; 
-           color: var(--carbon-suave); 
-           cursor: pointer; 
-           display: flex; 
-           flex-direction: column; 
-           align-items: center; 
-           gap: 0.3rem; 
-           padding: 0.5rem; 
-           transition: opacity var(--transition-medium); 
-           opacity: 0.05; 
-       }
+       
+       .audio-ui-btn { background: transparent; border: none; color: var(--carbon-suave); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: clamp(0.5rem, 2vw, 1rem); transition: opacity var(--transition-medium); opacity: 0.05; min-width: 44px; min-height: 44px; justify-content: center; }
        .audio-ui-btn:hover, .audio-ui-btn:focus-visible { opacity: 0.8; outline: none; }
        .audio-ui-btn:disabled { cursor: wait; opacity: 0.02; }
        .audio-text { font-size: 0.5rem; letter-spacing: 0.35em; color: currentColor; }
-       .audio-icon { width: 1.1rem; height: 1.1rem; color: currentColor; display: flex; align-items: center; justify-content: center; }
+       .audio-icon { width: clamp(1.1rem, 4vw, 1.3rem); height: clamp(1.1rem, 4vw, 1.3rem); color: currentColor; display: flex; align-items: center; justify-content: center; }
        .audio-icon svg { width: 100%; height: 100%; display: block; }
        .audio-ui-btn.is-playing .icon-muted { display: none !important; }
        .audio-ui-btn.is-playing .icon-playing { display: block !important; }
 
        /* CH1 HERO */
-       .ambient-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 720px; height: 720px; border-radius: 50%; background: radial-gradient(circle, var(--glow-color-Ch1) 0%, rgba(244, 240, 234, 0) 70%); pointer-events: none; filter: blur(55px); z-index: 1; }
-       .hero-container { opacity: 0; position: relative; z-index: 2; width: 100%; max-width: 460px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
-       .identity-stage { position: relative; width: 100%; height: 420px; margin-bottom: 2.2rem; display: flex; align-items: center; justify-content: center; filter: var(--drop-shadow-Ch1); z-index: 2; }
+       .ambient-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: clamp(300px, 80vw, 720px); height: clamp(300px, 80vw, 720px); border-radius: 50%; background: radial-gradient(circle, var(--glow-color-Ch1) 0%, rgba(244, 240, 234, 0) 70%); pointer-events: none; filter: blur(55px); z-index: 1; }
+       .hero-container { opacity: 0; position: relative; z-index: 2; width: 100%; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 0 1.5rem; }
+       
+       .identity-stage { position: relative; width: 100%; height: clamp(300px, 50vh, 420px); margin-bottom: clamp(1.5rem, 4vh, 2.2rem); display: flex; align-items: center; justify-content: center; filter: var(--drop-shadow-Ch1); z-index: 2; }
        #master-svg { width: 100%; height: 100%; display: block; overflow: visible; shape-rendering: geometricPrecision; }
 
        .editorial-block { text-align: center; display: flex; flex-direction: column; align-items: center; pointer-events: none; width: 100%; }
-       .chapter-tag { color: var(--bronce-mate); font-size: 0.65rem; letter-spacing: 0.45em; margin-bottom: 0.8rem; opacity: 0; transform: translateY(12px); }
-       .couple-names { font-size: 3.4rem; line-height: 1.05; letter-spacing: 0.03em; color: var(--carbon-suave); margin-bottom: 0.9rem; opacity: 0; transform: translateY(20px); }
-       .wedding-meta { font-size: 0.72rem; letter-spacing: 0.35em; color: var(--carbon-suave); opacity: 0; transform: translateY(12px); }
-       .line-separator { width: 40px; height: 1px; background: var(--bronce-mate); margin: 1.2rem auto 0; opacity: 0; transform: scaleX(0); transform-origin: center; }
-       .scroll-indicator { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); font-size: 0.6rem; letter-spacing: 0.4em; color: var(--bronce-mate); z-index: 10; opacity: 0; animation: pulse 2.5s infinite; }
+       .chapter-tag { color: var(--bronce-mate); font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.45em; margin-bottom: 0.8rem; opacity: 0; transform: translateY(12px); }
+       .couple-names { font-size: clamp(2.4rem, 8vw, 3.4rem); line-height: 1.05; letter-spacing: 0.03em; color: var(--carbon-suave); margin-bottom: 0.9rem; opacity: 0; transform: translateY(20px); }
+       .wedding-meta { font-size: clamp(0.55rem, 2.5vw, 0.72rem); letter-spacing: 0.35em; color: var(--carbon-suave); opacity: 0; transform: translateY(12px); }
+       .line-separator { width: 40px; height: 1px; background: var(--bronce-mate); margin: clamp(1rem, 3vh, 1.2rem) auto 0; opacity: 0; transform: scaleX(0); transform-origin: center; }
+       .scroll-indicator { position: absolute; bottom: clamp(1.5rem, 5vh, 3rem); left: 50%; transform: translateX(-50%); font-size: 0.6rem; letter-spacing: 0.4em; color: var(--bronce-mate); z-index: 10; opacity: 0; animation: pulse 2.5s infinite; }
        @keyframes pulse { 0% { opacity: 0.3; transform: translateX(-50%) translateY(0); } 50% { opacity: 0.7; transform: translateX(-50%) translateY(6px); } 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); } }
 
        /* ============================================================================
-          CAPÍTULO II: MANIFIESTO + FOTO DIRECTA (AISLADO)
+          CH2: LA ESENCIA (MANIFIESTO AISLADO + FOTO DIRECTA Y FLUIDA)
           ============================================================================ */
-       #chapter-2.essence-section-direct {
-           position: relative;
-           width: 100%;
-           background-color: var(--bg-marfil); /* Fondo sólido, limpio */
-           padding: 6rem 2rem 8rem 2rem;
-           z-index: 2;
-           display: flex;
+       #chapter-2 { 
+           position: relative; 
+           width: 100%; 
+           display: flex; 
            flex-direction: column;
-           align-items: center;
+           align-items: center; 
+           background-color: var(--bg-marfil); 
+           padding: clamp(4rem, 10vh, 8rem) 1.5rem; 
+           z-index: 2; 
+       }
+       
+       .content-layer-essence-text { 
+           position: relative; 
+           z-index: 2; 
+           display: flex; 
+           flex-direction: column; 
+           align-items: center; 
+           width: 100%; 
+           max-width: 800px; 
+           text-align: center; 
        }
 
-       .content-layer-essence-text {
-           position: relative;
-           z-index: 2;
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-           width: 100%;
-           max-width: 750px;
-           margin: 0 auto;
-           text-align: center;
+       .chapter-tag-essence { 
+           font-size: clamp(0.55rem, 2vw, 0.65rem); 
+           letter-spacing: 0.45em; 
+           color: var(--bronce-mate); 
+           margin-bottom: clamp(2rem, 5vh, 3rem); 
        }
 
-       .content-layer-essence-text .chapter-tag-essence {
-           font-size: 0.65rem;
-           letter-spacing: 0.45em;
-           color: var(--bronce-mate);
-           margin-bottom: 3rem;
+       .manifesto-text { 
+           font-size: clamp(1.2rem, 4vw, 2.4rem); 
+           line-height: 1.6; 
+           color: var(--carbon-suave); 
        }
 
-       .content-layer-essence-text .manifesto-text {
-           font-size: clamp(1.4rem, 3.5vw, 2.4rem);
-           line-height: 1.85;
-           color: var(--carbon-suave);
+       .manifesto-text span { 
+           display: block; 
+           margin-bottom: clamp(1.5rem, 4vh, 2.5rem); 
        }
-
-       .content-layer-essence-text .manifesto-text span {
-           display: block;
-           margin-bottom: 2.5rem;
+       
+       .manifesto-text span:last-child { 
+           margin-bottom: 0; 
        }
 
        .manifesto-photo-anchor {
            position: relative;
            width: 100%;
-           max-width: 480px;
-           margin-top: 5rem;
+           max-width: 480px; /* Ancho elegante de editorial */
+           margin-top: clamp(3rem, 8vh, 6rem); /* Separación natural y fluida */
            box-shadow: 0 30px 60px rgba(107, 76, 45, 0.12);
            overflow: hidden;
            z-index: 3;
@@ -202,15 +166,15 @@
 
        /* CH3 COORDENADAS */
        #chapter-3 { position: relative; width: 100%; height: 450vh; }
-       .sticky-container { position: sticky; top: 0; width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+       .sticky-container { position: sticky; top: 0; width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding: 0 1rem; }
        .ethereal-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) sepia(20%) contrast(120%); opacity: 0; z-index: 0; }
        .vignette-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(244,240,234,0.85) 0%, rgba(244,240,234,0.4) 40%, rgba(244,240,234,0.1) 100%); z-index: 1; pointer-events: none; }
-       #chapter-3 .chapter-tag { font-size: 0.65rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--bronce-mate); position: absolute; top: 15%; z-index: 10; }
+       #chapter-3 .chapter-tag { font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.45em; text-transform: uppercase; color: var(--bronce-mate); position: absolute; top: 15%; z-index: 10; }
        .monumental-text-container { position: relative; z-index: 2; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; pointer-events: none; }
        .info-layer { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; text-shadow: 0 0 40px rgba(244, 240, 234, 1), 0 0 15px rgba(244, 240, 234, 0.8); }
-       .date-display { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(3.5rem, 10vw, 7rem); line-height: 1; letter-spacing: 0.05em; color: var(--carbon-suave); }
-       .phase-tag { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--bronce-mate); margin-bottom: 1rem; }
-       .location-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 300; color: var(--carbon-suave); line-height: 1.2; }
+       .date-display { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem, 10vw, 7rem); line-height: 1; letter-spacing: 0.05em; color: var(--carbon-suave); }
+       .phase-tag { font-family: 'Montserrat', sans-serif; font-size: clamp(0.6rem, 2vw, 0.75rem); letter-spacing: 0.35em; text-transform: uppercase; color: var(--bronce-mate); margin-bottom: 1rem; }
+       .location-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 6vw, 4rem); font-weight: 300; color: var(--carbon-suave); line-height: 1.2; }
        #layer-ceremonia { opacity: 0; transform: translateY(40px); }
        #layer-recepcion { opacity: 0; transform: translateY(40px); }
     </style>
@@ -289,7 +253,7 @@
         </main>
 
         <!-- ==================================================================== -->
-        <!-- CAPÍTULO II: LA ESENCIA (MANIFIESTO + FOTO DIRECTA)                  -->
+        <!-- CAPÍTULO II: LA ESENCIA (MANIFIESTO LIMPIO + FOTO DIRECTA)           -->
         <!-- ==================================================================== -->
         <section id="chapter-2" class="essence-section-direct" aria-label="La Esencia">
             
@@ -314,7 +278,6 @@
         <!-- CAPÍTULO III: COORDENADAS -->
         <section id="chapter-3">
             <div class="sticky-container">
-              
               <img src="iglesia.jpeg" alt="Iglesia" class="ethereal-bg" id="bg-iglesia">
               <img src="jardin.jpeg" alt="Jardín" class="ethereal-bg" id="bg-jardin">
               <div class="vignette-overlay"></div>
@@ -322,26 +285,19 @@
               <div class="chapter-tag" id="ch-tag">Capítulo III &bull; Coordenadas</div>
 
               <div class="monumental-text-container">
-                
-                <!-- Capa 1: Fecha -->
                 <div class="info-layer" id="layer-fecha">
                   <div class="date-display">21 . 11 . 2026</div>
                 </div>
-
-                <!-- Capa 2: Ceremonia -->
                 <div class="info-layer" id="layer-ceremonia">
                   <div class="phase-tag">La Ceremonia</div>
                   <div class="location-title">Iglesia Principal</div>
-                  <div style="font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Ixtapan de la Sal</div>
+                  <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Ixtapan de la Sal</div>
                 </div>
-
-                <!-- Capa 3: Recepción -->
                 <div class="info-layer" id="layer-recepcion">
                   <div class="phase-tag">La Celebración</div>
                   <div class="location-title">Finca El Encanto</div>
-                  <div style="font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Recepción y Banquete</div>
+                  <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Recepción y Banquete</div>
                 </div>
-
               </div>
             </div>
         </section>
@@ -356,7 +312,7 @@
     <script>
         /**
          * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR
-         * BASE FUNCIONAL INTACTA
+         * BASE DE ANIMACIONES INTACTA (RESPONSIVE)
          */
         const weddingConfig = {
             couple: {
@@ -380,123 +336,157 @@
 
         gsap.registerPlugin(ScrollTrigger);
 
-        document.addEventListener("DOMContentLoaded", () => {
-            
-            // 0.5 MOTOR DE INERCIA Y SCROLL SUAVE (LENIS)
-            const lenis = new Lenis({
-                duration: 1.2,      
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-                smooth: true,
-                smoothTouch: false  
-            });
+        // =========================================
+        // 0.5 MOTOR DE INERCIA Y SCROLL SUAVE (LENIS)
+        // =========================================
+        const lenis = new Lenis({
+            duration: 1.2,      
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            smooth: true,
+            smoothTouch: false  
+        });
 
-            window.scrollTo(0, 0);
-            lenis.stop();
+        window.scrollTo(0, 0);
+        lenis.stop();
 
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
+        function raf(time) {
+            lenis.raf(time);
             requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
 
-            lenis.on('scroll', ScrollTrigger.update);
-            gsap.ticker.add((time) => {
-                lenis.raf(time * 1000);
-            });
-            gsap.ticker.lagSmoothing(0, 0);
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0, 0);
 
-            // 0. CEREMONIAL GATE & AUDIO UNLOCK
-            const enterBtn = document.getElementById('enter-experience');
-            const audioTrack = document.getElementById('ambient-track');
-            const ceremonialGate = document.getElementById('ceremonial-gate');
-            const audioToggleButton = document.getElementById('audio-toggle');
-            
-            let isAudioPlaying = false;
+        // =========================================
+        // 0. CEREMONIAL GATE (LOADER) & AUDIO CONTROL
+        // =========================================
+        const enterBtn = document.getElementById('enter-experience');
+        const audioTrack = document.getElementById('ambient-track');
+        const ceremonialGate = document.getElementById('ceremonial-gate');
+        const audioToggleButton = document.getElementById('audio-toggle');
+        const audioContainer = document.getElementById('audioContainer');
 
-            if(enterBtn) {
-                enterBtn.addEventListener('click', () => {
-                    if(audioTrack && weddingConfig.audio.enabled) {
-                        audioTrack.volume = 0; 
-                        audioTrack.play().then(() => {
-                            isAudioPlaying = true;
-                            if(audioToggleButton) {
-                                audioToggleButton.removeAttribute('disabled');
-                                audioToggleButton.classList.add('is-playing');
-                            }
-                            gsap.to(audioTrack, { volume: 1, duration: 3 });
-                        }).catch(e => console.warn("Audio bloqueado", e));
-                    }
+        let isAudioPlaying = false;
 
-                    gsap.to(enterBtn, { opacity: 0, duration: 0.5 });
-                    gsap.to(ceremonialGate, { 
-                        opacity: 0, 
-                        duration: 1.5, 
-                        delay: 1.0, 
-                        ease: "power2.inOut",
-                        onComplete: () => {
-                            gsap.set(ceremonialGate, { display: "none" });
-                            initSPAAnimations(); 
-                            lenis.start(); 
+        if(enterBtn) {
+            enterBtn.addEventListener('click', () => {
+                if(audioTrack && weddingConfig.audio.enabled) {
+                    audioTrack.volume = 0; 
+                    audioTrack.play().then(() => {
+                        isAudioPlaying = true;
+                        if(audioToggleButton) {
+                            audioToggleButton.removeAttribute('disabled');
+                            audioToggleButton.classList.add('is-playing');
                         }
-                    });
-                });
-            }
+                        gsap.to(audioTrack, { volume: 1, duration: 3 });
+                    }).catch(e => console.warn("Audio bloqueado por navegador", e));
+                }
 
-            // 1. DATA INJECTION
-            document.getElementById('txt-chapter').textContent = weddingConfig.chapterOne.title;
-            document.getElementById('txt-couple').textContent = weddingConfig.couple.fullName;
-            document.getElementById('txt-meta').textContent = weddingConfig.chapterOne.metaText;
-
-            // 2. AUDIO COMPONENT
-            if(weddingConfig.audio.enabled && audioToggleButton && audioTrack) {
-                audioToggleButton.addEventListener('click', () => {
-                    if (isAudioPlaying) {
-                        audioTrack.pause();
-                        audioToggleButton.classList.remove('is-playing');
-                    } else {
-                        audioTrack.play().catch(e => console.warn("Autoplay bloqueado", e));
-                        audioToggleButton.classList.add('is-playing');
+                gsap.to(enterBtn, { opacity: 0, duration: 0.5 });
+                gsap.to(ceremonialGate, { 
+                    opacity: 0, 
+                    duration: 1.5, 
+                    delay: 0.3, 
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        gsap.set(ceremonialGate, { display: "none" });
+                        if(audioContainer) audioContainer.classList.add('is-active');
+                        initSPAAnimations(); 
+                        lenis.start();       
                     }
-                    isAudioPlaying = !isAudioPlaying;
                 });
-            }
+            });
+        }
 
-            // 3. SPA MOTION ORCHESTRATION
-            function initSPAAnimations() {
-                // CH1: EL UMBRAL
-                gsap.set(".hero-container", { opacity: 1 });
+        // =========================================
+        // 1. DATA INJECTION
+        // =========================================
+        document.getElementById('txt-chapter').textContent = weddingConfig.chapterOne.title;
+        document.getElementById('txt-couple').textContent = weddingConfig.couple.fullName;
+        document.getElementById('txt-meta').textContent = weddingConfig.chapterOne.metaText;
+
+        if(weddingConfig.audio.enabled && audioToggleButton && audioTrack) {
+            audioToggleButton.addEventListener('click', () => {
+                if (isAudioPlaying) {
+                    audioTrack.pause();
+                    audioToggleButton.classList.remove('is-playing');
+                } else {
+                    audioTrack.play().catch(e => console.warn("Autoplay bloqueado", e));
+                    audioToggleButton.classList.add('is-playing');
+                }
+                isAudioPlaying = !isAudioPlaying;
+            });
+        }
+
+        // =========================================
+        // 2. SPA MOTION ORCHESTRATION (MATCH MEDIA)
+        // =========================================
+        function initSPAAnimations() {
+            gsap.set(".hero-container", { opacity: 1 });
+            
+            let mm = gsap.matchMedia();
+
+            mm.add({
+                isDesktop: "(min-width: 769px)",
+                isMobile: "(max-width: 768px)"
+            }, (context) => {
+                let { isDesktop, isMobile } = context.conditions;
+
+                const svgInitialScale = isMobile ? 0.70 : 0.88;
+                const scrollEndCh1 = isMobile ? "+=120%" : "+=150%";
+
+                // --- CH1: EL UMBRAL ---
                 const center = 500;
                 const radiusCut = 1400; 
                 const radiusEcho = 1480; 
                 const endPolyCut = `${center},${center - radiusCut} ${center + radiusCut},${center} ${center},${center + radiusCut} ${center - radiusCut},${center}`;
                 const endPolyEcho = `${center},${center - radiusEcho} ${center + radiusEcho},${center} ${center},${center + radiusEcho} ${center - radiusEcho},${center}`;
 
-                gsap.set("#dna-layer", { transformOrigin: "500px 500px", scale: 0.88 });
+                gsap.set("#dna-layer", { transformOrigin: "500px 500px", scale: svgInitialScale });
 
                 const ch1Tl = gsap.timeline({ 
-                    scrollTrigger: { trigger: ".hero-container", start: "top top", end: "+=150%", scrub: 1, pin: true }
+                    scrollTrigger: { trigger: ".hero-container", end: scrollEndCh1 },
+                    delay: 0.2 
                 });
                 
                 ch1Tl
-                    .to(".diamond-shape:not(#echo-diamond)", { attr: { points: endPolyCut }, duration: 1.8, ease: "power3.inOut" }, 0)
-                    .to("#cutting-diamond", { strokeWidth: 0, duration: 1.8, ease: "power3.inOut" }, 0)
-                    .to("#echo-diamond", { attr: { points: endPolyEcho }, strokeWidth: 0, opacity: 0, duration: 1.8, ease: "power3.out" }, 0)
-                    .to("#dna-layer", { scale: 1, duration: 1.8, ease: "power3.inOut" }, 0) 
+                    .to(".diamond-shape:not(#echo-diamond)", { attr: { points: endPolyCut }, duration: 6.0, ease: "power3.inOut" }, 0)
+                    .to("#cutting-diamond", { strokeWidth: 0, duration: 6.0, ease: "power3.inOut" }, 0)
+                    .to("#echo-diamond", { attr: { points: endPolyEcho }, strokeWidth: 0, opacity: 0, duration: 6.0, ease: "power3.out" }, 0)
+                    .to("#dna-layer", { scale: 1, duration: 6.0, ease: "power3.inOut" }, 0) 
+                    .to("#audioContainer", { opacity: 1, duration: 6.0, ease: "power3.inOut" }, 0) 
                     
-                    .to(".chapter-tag", { opacity: 0.85, y: 0, duration: 1.2, ease: "power3.out" }, "-=1.0")
-                    .to(".couple-names", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }, "-=1.1")
-                    .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 1.2, ease: "power3.out" }, "-=1.2")
-                    .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 1.0, ease: "power2.out" }, "-=1.0")
+                    .to(".chapter-tag", { opacity: 0.85, y: 0, duration: 2.0, ease: "power3.out" }, 3.0)
+                    .to(".couple-names", { opacity: 1, y: 0, duration: 2.5, ease: "power4.out" }, 3.4)
+                    .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 2.0, ease: "power3.out" }, 3.8)
+                    .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 2.0, ease: "power2.out" }, 4.2)
                     
-                    .to(".scroll-indicator", { opacity: 1, duration: 1.0, ease: "sine.inOut" }, "+=0.1")
-                    .to("#heroContainer", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, "+=0.1");
+                    .to(".scroll-indicator", { opacity: 1, duration: 1.5, ease: "sine.inOut" }, 6.0)
+                    .to("#heroContainer", { y: isMobile ? -8 : -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 6.0);
 
-                // CH3: COORDENADAS
-                const tl = gsap.timeline({
+                // --- CH2: LA ESENCIA ---
+                /* NOTA: Eliminado el Pin/Scrub que colisionaba con el nuevo layout limpio */
+                gsap.utils.toArray(".fade-line-2").forEach((line) => {
+                    gsap.from(line, {
+                        scrollTrigger: { trigger: "#chapter-2", start: "top 70%" },
+                        y: isMobile ? 15 : 30, 
+                        opacity: 0, 
+                        duration: 1.2, 
+                        stagger: 0.2, 
+                        ease: "power3.out"
+                    });
+                });
+
+                // --- CH3: COORDENADAS ---
+                const ch3Tl = gsap.timeline({
                     scrollTrigger: { trigger: "#chapter-3", start: "top top", end: "bottom bottom", scrub: 1.5 }
                 });
 
-                tl
+                ch3Tl
                     .to("#bg-iglesia", { opacity: 0.25, duration: 1 }, 0)
                     .to("#layer-fecha", { opacity: 0, y: -40, duration: 1 }, 1)
                     .to("#layer-ceremonia", { opacity: 1, y: 0, duration: 1 }, 2)
@@ -509,8 +499,9 @@
                     .to("#layer-recepcion", { opacity: 0, y: -40, duration: 1 }, 8)
                     .to("#bg-jardin", { opacity: 0, duration: 1 }, 8)
                     .to("#ch-tag", { opacity: 0, duration: 1 }, 8);
-            } 
-        });
+                    
+            }); // Fin contexto MatchMedia
+        }
     </script>
 </body>
 </html>

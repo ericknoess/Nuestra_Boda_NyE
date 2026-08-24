@@ -99,7 +99,6 @@ if(weddingConfig.audio.enabled && audioToggleButton && audioTrack) {
 function initSPAAnimations() {
     gsap.set(".hero-container", { opacity: 1 });
     
-    // Implementación de contexto GSAP MatchMedia para responsividad perfecta
     let mm = gsap.matchMedia();
 
     mm.add({
@@ -108,10 +107,9 @@ function initSPAAnimations() {
     }, (context) => {
         let { isDesktop, isMobile } = context.conditions;
 
-        // Parámetros Dinámicos
         const svgInitialScale = isMobile ? 0.70 : 0.88;
         const scrollEndCh1 = isMobile ? "+=120%" : "+=150%";
-        const scrollEndCh2 = isMobile ? "+=220%" : "+=150%"; // Más largo en mobile para inercia táctil
+        const scrollEndCh2 = isMobile ? "+=220%" : "+=150%"; 
 
         // --- CH1: EL UMBRAL ---
         const center = 500;
@@ -147,7 +145,7 @@ function initSPAAnimations() {
         gsap.utils.toArray(".fade-line-2").forEach((line) => {
             gsap.from(line, {
                 scrollTrigger: { trigger: "#chapter-2", start: "top 70%" },
-                y: isMobile ? 15 : 30, // Menos desplazamiento en móvil
+                y: isMobile ? 15 : 30, 
                 opacity: 0, 
                 duration: 1.2, 
                 stagger: 0.2, 
@@ -159,7 +157,7 @@ function initSPAAnimations() {
             scrollTrigger: {
                 trigger: "#chapter-2",
                 start: "top top",
-                end: scrollEndCh2, // Distancia dinámica
+                end: scrollEndCh2, 
                 scrub: 1,          
                 pin: true
             }
@@ -190,5 +188,5 @@ function initSPAAnimations() {
             .to("#bg-jardin", { opacity: 0, duration: 1 }, 8)
             .to("#ch-tag", { opacity: 0, duration: 1 }, 8);
             
-    }); // Fin contexto MatchMedia
+    }); 
 }
