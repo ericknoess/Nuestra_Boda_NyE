@@ -1,7 +1,6 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.75
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.63
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
- * FIX: Vibración resuelta y Bug de Rasterización de Máscara neutralizado.
  */
 
 import weddingConfig from './config.js';
@@ -113,41 +112,37 @@ function initSPAAnimations() {
     const endPolyCut = `${center},${center - radiusCut} ${center + radiusCut},${center} ${center},${center + radiusCut} ${center - radiusCut},${center}`;
     const endPolyEcho = `${center},${center - radiusEcho} ${center + radiusEcho},${center} ${center},${center + radiusEcho} ${center - radiusEcho},${center}`;
 
-    // Fix Escala: Aplicamos la escala inicial al #master-svg entero, NO a la máscara interior.
-    gsap.set("#master-svg", { transformOrigin: "50%" , scale: 0.85 });
-
-    // Fix Vibración: Aplicamos el yoyo al contenido INTERNO (.identity-stage), 
-    // nunca al contenedor #heroContainer porque éste será anclado (pin: true) por ScrollTrigger.
-    gsap.to(".identity-stage", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
+    gsap.set("#dna-layer", { transformOrigin: "500px 500px", scale: 0.88 });
 
     const ch1Tl = gsap.timeline({ 
         scrollTrigger: { 
             trigger: ".hero-container", 
-            start: "top top",
-            end: "+=150%",
-            scrub: 1,
-            pin: true 
-        }
+            end: "+=150%"
+        },
+        delay: 0.2 
     });
     
     ch1Tl
-        .to(".diamond-shape:not(#echo-diamond)", { attr: { points: endPolyCut }, duration: 1.8, ease: "power3.inOut" }, 0)
-        .to("#cutting-diamond", { strokeWidth: 0, duration: 1.8, ease: "power3.inOut" }, 0)
-        .to("#echo-diamond", { attr: { points: endPolyEcho }, strokeWidth: 0, opacity: 0, duration: 1.8, ease: "power3.out" }, 0)
+        // FASE 1: Apertura majestuosa del diamante (ralentizada a 3.0s para mayor apreciación)
+        .to(".diamond-shape:not(#echo-diamond)", { attr: { points: endPolyCut }, duration: 3.0, ease: "power3.inOut" }, 0)
+        .to("#cutting-diamond", { strokeWidth: 0, duration: 6.0, ease: "power3.inOut" }, 0)
+        .to("#echo-diamond", { attr: { points: endPolyEcho }, strokeWidth: 0, opacity: 0, duration: 3.0, ease: "power3.out" }, 0)
+        .to("#dna-layer", { scale: 1, duration: 3.0, ease: "power3.inOut" }, 0) 
+        .to("#audioContainer", { opacity: 1, duration: 3.0, ease: "power3.inOut" }, 0) 
         
-        // Animamos la escala del SVG completo para no corromper la renderización de la GPU en Safari/Chrome
-        .to("#master-svg", { scale: 1, duration: 1.8, ease: "power3.inOut" }, 0) 
-        .to("#audioContainer", { opacity: 1, duration: 1.8, ease: "power3.inOut" }, 0) 
+        // FASE 2: Los textos aparecen de forma escalonada una vez que el diamante va a la mitad de su trayecto
+        .to(".chapter-tag", { opacity: 0.85, y: 0, duration: 1.5, ease: "power3.out" }, 1.5)
+        .to(".couple-names", { opacity: 1, y: 0, duration: 2.0, ease: "power4.out" }, 1.7)
+        .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 1.5, ease: "power3.out" }, 1.9)
+        .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 1.5, ease: "power2.out" }, 2.1)
         
-        .to(".chapter-tag", { opacity: 0.85, y: 0, duration: 1.2, ease: "power3.out" }, "-=1.0")
-        .to(".couple-names", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }, "-=1.1")
-        .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 1.2, ease: "power3.out" }, "-=1.2")
-        .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 1.0, ease: "power2.out" }, "-=1.0")
-        .to(".scroll-indicator", { opacity: 1, duration: 1.0, ease: "sine.inOut" }, "+=0.1");
+        // FASE 3: Indicadores de scroll y efecto flotante al finalizar
+        .to(".scroll-indicator", { opacity: 1, duration: 1.2, ease: "sine.inOut" }, 3.0)
+        .to("#heroContainer", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 3.0);
 
-    // --- CH2: LA ESENCIA (FADE REVEAL) ---
+
+    // --- CH2: LA ESENCIA (FADE REVEAL CON PIN Y SCRUB) ---
     
-    // 1. Animación suave del texto al entrar a la sección con Scroll natural
     gsap.utils.toArray(".fade-line-2").forEach((line) => {
         gsap.from(line, {
             scrollTrigger: { 
@@ -162,8 +157,6 @@ function initSPAAnimations() {
         });
     });
 
-    // 2. Timeline Maestra: Al fijar la pantalla (pin), el texto desaparece, 
-    //    el bloque de color marfil se esfuma y la foto majestuosa queda revelada
     const ch2Tl = gsap.timeline({
         scrollTrigger: {
             trigger: "#chapter-2",
