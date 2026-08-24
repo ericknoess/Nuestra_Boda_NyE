@@ -1,7 +1,6 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.29
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.62
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
- * FIX: Chapter II Scroll Fluidity & Parallax Bounds Calibration
  */
 
 import weddingConfig from './config.js';
@@ -115,9 +114,10 @@ function initSPAAnimations() {
 
     gsap.set("#dna-layer", { transformOrigin: "500px 500px", scale: 0.88 });
 
+    // RESTAURADO A BASE CERO PARA NO ROMPER EL RENDERIZADO DEL DIAMOND EN WEBKIT
     const ch1Tl = gsap.timeline({ 
-        scrollTrigger: {
-            trigger: ".hero-container",
+        scrollTrigger: { 
+            trigger: ".hero-container", 
             end: "+=150%"
         },
         delay: 0.1 
@@ -139,66 +139,44 @@ function initSPAAnimations() {
         .to(".scroll-indicator", { opacity: 1, duration: 1.0, ease: "sine.inOut" }, "+=0.1")
         .to("#heroContainer", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, "+=0.1");
 
-    // --- CH2: LA ESENCIA (Calibración de Scroll Fluido y Sincronización de Parallax) ---
-    gsap.to(".parallax-bg", { 
-        y: 120, 
-        ease: "none", 
-        scrollTrigger: { 
-            trigger: "#chapter-2", 
-            start: "top 90%", 
-            end: "bottom 10%", 
-            scrub: true 
-        }
-    });
-    
-    gsap.to(".parallax-fg", { 
-        y: -180, 
-        ease: "none", 
-        scrollTrigger: { 
-            trigger: "#chapter-2", 
-            start: "top 90%", 
-            end: "bottom 10%", 
-            scrub: true 
-        }
-    });
-    
-    gsap.fromTo(".content-layer-essence", 
-        { y: 20 }, 
-        { 
-            y: -10, 
-            ease: "none", 
-            scrollTrigger: { 
-                trigger: "#chapter-2", 
-                start: "top 90%", 
-                end: "bottom 10%", 
-                scrub: true 
-            }
-        }
-    );
 
-    gsap.from(".chapter-tag-essence", { 
-        scrollTrigger: { 
-            trigger: ".content-layer-essence", 
-            start: "top 80%" 
-        }, 
-        y: 20, 
-        opacity: 0, 
-        duration: 1.5, 
-        ease: "power3.out" 
-    });
-
+    // --- CH2: LA ESENCIA (FADE REVEAL) ---
+    
+    // 1. Animación suave del texto al entrar a la sección con Scroll natural
     gsap.utils.toArray(".fade-line-2").forEach((line) => {
         gsap.from(line, {
             scrollTrigger: { 
-                trigger: line, 
-                start: "top 85%" 
+                trigger: "#chapter-2", 
+                start: "top 70%" 
             },
             y: 30, 
             opacity: 0, 
             duration: 1.2, 
+            stagger: 0.2, // Añade un ligero retraso entre líneas para mayor fluidez
             ease: "power3.out"
         });
     });
+
+    // 2. Timeline Maestra: Al fijar la pantalla (pin), el texto desaparece, 
+    //    el bloque de color marfil se esfuma y la foto majestuosa queda revelada
+    const ch2Tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#chapter-2",
+            start: "top top",
+            end: "+=150%",     // El usuario debe hacer un "scroll extra" del 150% de la pantalla para revelar la foto
+            scrub: 1,          // Scrubbing muy suave
+            pin: true
+        }
+    });
+
+    ch2Tl
+        // Fase 1: El texto del manifiesto se eleva sutilmente y desaparece
+        .to("#manifesto-content", { opacity: 0, y: -40, duration: 1 }, 0)
+        // Fase 2: El bloque de color sólido pierde opacidad, revelando la foto que está detrás
+        .to("#solid-canvas", { opacity: 0, duration: 1.5 }, 0.5)
+        // Fase 3: La foto, que inició ligeramente más grande (1.1), se acomoda perfectamente (1.0)
+        .to(".majestic-ethereal-photo", { scale: 1, duration: 2, ease: "sine.out" }, 0.5);
+
 
     // --- CH3: COORDENADAS ---
     const tl = gsap.timeline({

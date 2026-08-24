@@ -1,6 +1,6 @@
 /* ============================================================================
-   LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V3.33
-   INTEGRATING: Core Reset, Chapter I, Chapter II, Chapter III (V5.9 Ethereal)
+   LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V3.62
+   INTEGRATING: Core Reset, Chapter I (Vector Fix), Chapter II (Fade Reveal), Chapter III
    ============================================================================ */
 
    :root {
@@ -56,7 +56,7 @@ body {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-    .chromatic-block, .ambient-glow, .scroll-indicator { display: none !important; }
+    .ambient-glow, .scroll-indicator { display: none !important; }
 }
 
 .font-display { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: normal; }
@@ -71,6 +71,7 @@ body {
     background-color: var(--bg-marfil);
     z-index: 9999;
     opacity: 1;
+    transition: opacity 0.5s cubic-bezier(0.65, 0, 0.35, 1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -117,7 +118,15 @@ body {
 .ambient-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 720px; height: 720px; border-radius: 50%; background: radial-gradient(circle, var(--glow-color-Ch1) 0%, rgba(244, 240, 234, 0) 70%); pointer-events: none; filter: blur(55px); z-index: 1; }
 .hero-container { opacity: 0; position: relative; z-index: 2; width: 100%; max-width: 460px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
 .identity-stage { position: relative; width: 100%; height: 420px; margin-bottom: 2.2rem; display: flex; align-items: center; justify-content: center; filter: var(--drop-shadow-Ch1); z-index: 2; }
-#master-svg { width: 100%; height: 100%; display: block; overflow: visible; shape-rendering: geometricPrecision; }
+
+/* RESTAURADO EXACTAMENTE DE LA MAQUETA FUNCIONAL: Sin properties destructivas como isolation o transform-style */
+#master-svg { 
+    width: 100%; 
+    height: 100%; 
+    display: block; 
+    overflow: visible; 
+    shape-rendering: geometricPrecision; 
+}
 
 .editorial-block { text-align: center; display: flex; flex-direction: column; align-items: center; pointer-events: none; width: 100%; }
 .chapter-tag { color: var(--bronce-mate); font-size: 0.65rem; letter-spacing: 0.45em; margin-bottom: 0.8rem; opacity: 0; transform: translateY(12px); }
@@ -127,49 +136,82 @@ body {
 .scroll-indicator { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); font-size: 0.6rem; letter-spacing: 0.4em; color: var(--bronce-mate); z-index: 10; opacity: 0; animation: pulse 2.5s infinite; }
 @keyframes pulse { 0% { opacity: 0.3; transform: translateX(-50%) translateY(0); } 50% { opacity: 0.7; transform: translateX(-50%) translateY(6px); } 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); } }
 
-/* CH2 ESSENCE */
-#chapter-2 { padding: 6rem 2rem; z-index: 2; background-color: var(--bg-marfil); overflow: hidden; pointer-events: none; min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
-.essence-section { pointer-events: auto; }
-.chromatic-block { position: absolute; background-color: var(--bg-rosa); border-radius: 2px; pointer-events: none; overflow: hidden; }
-
-/* ESTILO ETHEREAL PARA LAS IMÁGENES (Idéntico a Sección III) */
-.ethereal-img-wrapper { width: 80vw; max-width: 550px; height: 65vh; top: -5%; left: -8%; z-index: 0; box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
-.ethereal-img-wrapper-secondary { width: 45vw; max-width: 280px; height: 38vh; bottom: -10%; right: -5%; z-index: 1; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-.essence-ethereal-photo { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) sepia(20%) contrast(120%); display: block; }
-
-/* FIX VISIBILIDAD: Eliminamos el blur masivo. Usamos un halo central que deja ver las imágenes en los bordes */
-.content-layer-essence { 
-    position: relative; 
-    z-index: 10; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    width: 100%; 
-    max-width: 800px; 
-    margin: 0 auto; 
-    padding: 5rem 2rem; 
-    background: radial-gradient(ellipse at center, rgba(244, 240, 234, 0.95) 20%, rgba(244, 240, 234, 0.5) 60%, rgba(244, 240, 234, 0) 100%);
+/* CH2: FADE REVEAL CREADO EXACTO AL REQUERIMIENTO */
+#chapter-2 {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Fija a pantalla completa para el Pin fluido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--bg-marfil);
+    z-index: 2;
 }
 
-.chapter-tag-essence { 
-    font-size: 0.65rem; 
-    letter-spacing: 0.45em; 
-    color: var(--bronce-mate); 
-    margin-bottom: 2.5rem; 
-    text-align: center; 
-    text-shadow: 0 0 15px rgba(244, 240, 234, 1);
+/* Capa inferior (Imagen de fondo a dominar) */
+.majestic-photo-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 
-.manifesto-text { 
-    font-size: clamp(1.4rem, 3vw, 2.5rem); 
-    line-height: 1.85; 
-    text-align: center; 
-    color: var(--carbon-suave); 
-    /* Escudo protector directamente sobre las letras para máxima legibilidad móvil */
-    text-shadow: 0 0 25px rgba(244, 240, 234, 1), 0 0 10px rgba(244, 240, 234, 0.9);
+.majestic-ethereal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) sepia(20%) contrast(120%);
+    transform: scale(1.1); /* Efecto de escala inicial sutil que GSAP suaviza a 1 */
+    display: block;
 }
-.manifesto-text span { display: block; margin-bottom: 2.5rem; }
-.manifesto-text span:last-child { margin-bottom: 0; }
+
+/* Capa media (El bloque de fondo limpio que oculta la foto inicialmente) */
+.solid-canvas-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-marfil); /* Fondo totalmente limpio y sólido para lectura */
+    z-index: 1;
+}
+
+/* Capa superior (Texto del manifiesto) */
+.content-layer-essence-fog {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.chapter-tag-essence {
+    font-size: 0.65rem;
+    letter-spacing: 0.45em;
+    color: var(--bronce-mate);
+    margin-bottom: 3rem;
+}
+
+.manifesto-text {
+    font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+    line-height: 1.85;
+    color: var(--carbon-suave);
+}
+
+.manifesto-text span {
+    display: block;
+    margin-bottom: 2.5rem;
+}
+
+.manifesto-text span:last-child {
+    margin-bottom: 0;
+}
 
 /* CH3 COORDENADAS */
 #chapter-3 { position: relative; width: 100%; height: 450vh; }
