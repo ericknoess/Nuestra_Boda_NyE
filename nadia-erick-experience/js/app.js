@@ -140,7 +140,6 @@ function initSPAAnimations() {
         .to("#heroContainer", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, "+=0.1");
 
     // --- CH2: LA ESENCIA (Calibración de Scroll Fluido y Sincronización de Parallax) ---
-    // Optimizamos start/end para que la interpolación abarque exactamente el recorrido natural del contenedor sin saltos
     gsap.to(".parallax-bg", { 
         y: 120, 
         ease: "none", 
