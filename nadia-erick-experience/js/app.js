@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.63
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.64
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -123,22 +123,23 @@ function initSPAAnimations() {
     });
     
     ch1Tl
-        // FASE 1: Apertura majestuosa del diamante (ralentizada a 3.0s para mayor apreciación)
-        .to(".diamond-shape:not(#echo-diamond)", { attr: { points: endPolyCut }, duration: 3.0, ease: "power3.inOut" }, 0)
+        // FASE 1: Apertura majestuosa del diamante (ralentizada a 6.0s)
+        .to(".diamond-shape:not(#echo-diamond)", { attr: { points: endPolyCut }, duration: 6.0, ease: "power3.inOut" }, 0)
         .to("#cutting-diamond", { strokeWidth: 0, duration: 6.0, ease: "power3.inOut" }, 0)
-        .to("#echo-diamond", { attr: { points: endPolyEcho }, strokeWidth: 0, opacity: 0, duration: 3.0, ease: "power3.out" }, 0)
-        .to("#dna-layer", { scale: 1, duration: 3.0, ease: "power3.inOut" }, 0) 
-        .to("#audioContainer", { opacity: 1, duration: 3.0, ease: "power3.inOut" }, 0) 
+        .to("#echo-diamond", { attr: { points: endPolyEcho }, strokeWidth: 0, opacity: 0, duration: 6.0, ease: "power3.out" }, 0)
+        .to("#dna-layer", { scale: 1, duration: 6.0, ease: "power3.inOut" }, 0) 
+        .to("#audioContainer", { opacity: 1, duration: 6.0, ease: "power3.inOut" }, 0) 
         
-        // FASE 2: Los textos aparecen de forma escalonada una vez que el diamante va a la mitad de su trayecto
-        .to(".chapter-tag", { opacity: 0.85, y: 0, duration: 1.5, ease: "power3.out" }, 1.5)
-        .to(".couple-names", { opacity: 1, y: 0, duration: 2.0, ease: "power4.out" }, 1.7)
-        .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 1.5, ease: "power3.out" }, 1.9)
-        .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 1.5, ease: "power2.out" }, 2.1)
+        // FASE 2: Los textos aparecen de forma escalonada una vez que el diamante va a la mitad de su trayecto (3.0s)
+        // Se alargan un poco las duraciones para que empaten con el "mood" relajado de los 6 segundos.
+        .to(".chapter-tag", { opacity: 0.85, y: 0, duration: 2.0, ease: "power3.out" }, 3.0)
+        .to(".couple-names", { opacity: 1, y: 0, duration: 2.5, ease: "power4.out" }, 3.4)
+        .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 2.0, ease: "power3.out" }, 3.8)
+        .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 2.0, ease: "power2.out" }, 4.2)
         
-        // FASE 3: Indicadores de scroll y efecto flotante al finalizar
-        .to(".scroll-indicator", { opacity: 1, duration: 1.2, ease: "sine.inOut" }, 3.0)
-        .to("#heroContainer", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 3.0);
+        // FASE 3: Indicadores de scroll y efecto flotante inician al finalizar la fase 1 (6.0s)
+        .to(".scroll-indicator", { opacity: 1, duration: 1.5, ease: "sine.inOut" }, 6.0)
+        .to("#heroContainer", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 6.0);
 
 
     // --- CH2: LA ESENCIA (FADE REVEAL CON PIN Y SCRUB) ---
