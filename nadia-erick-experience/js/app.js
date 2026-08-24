@@ -1,6 +1,7 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.62
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.75
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
+ * FIX: Vibración resuelta y Bug de Rasterización de Máscara neutralizado.
  */
 
 import weddingConfig from './config.js';
@@ -112,15 +113,21 @@ function initSPAAnimations() {
     const endPolyCut = `${center},${center - radiusCut} ${center + radiusCut},${center} ${center},${center + radiusCut} ${center - radiusCut},${center}`;
     const endPolyEcho = `${center},${center - radiusEcho} ${center + radiusEcho},${center} ${center},${center + radiusEcho} ${center - radiusEcho},${center}`;
 
-    gsap.set("#dna-layer", { transformOrigin: "500px 500px", scale: 0.88 });
+    // Fix Escala: Aplicamos la escala inicial al #master-svg entero, NO a la máscara interior.
+    gsap.set("#master-svg", { transformOrigin: "50%" , scale: 0.85 });
 
-    // RESTAURADO A BASE CERO PARA NO ROMPER EL RENDERIZADO DEL DIAMOND EN WEBKIT
+    // Fix Vibración: Aplicamos el yoyo al contenido INTERNO (.identity-stage), 
+    // nunca al contenedor #heroContainer porque éste será anclado (pin: true) por ScrollTrigger.
+    gsap.to(".identity-stage", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
+
     const ch1Tl = gsap.timeline({ 
         scrollTrigger: { 
             trigger: ".hero-container", 
-            end: "+=150%"
-        },
-        delay: 0.1 
+            start: "top top",
+            end: "+=150%",
+            scrub: 1,
+            pin: true 
+        }
     });
     
     ch1Tl
@@ -128,17 +135,15 @@ function initSPAAnimations() {
         .to("#cutting-diamond", { strokeWidth: 0, duration: 1.8, ease: "power3.inOut" }, 0)
         .to("#echo-diamond", { attr: { points: endPolyEcho }, strokeWidth: 0, opacity: 0, duration: 1.8, ease: "power3.out" }, 0)
         
-        .to("#dna-layer", { scale: 1, duration: 1.8, ease: "power3.inOut" }, 0) 
+        // Animamos la escala del SVG completo para no corromper la renderización de la GPU en Safari/Chrome
+        .to("#master-svg", { scale: 1, duration: 1.8, ease: "power3.inOut" }, 0) 
         .to("#audioContainer", { opacity: 1, duration: 1.8, ease: "power3.inOut" }, 0) 
         
         .to(".chapter-tag", { opacity: 0.85, y: 0, duration: 1.2, ease: "power3.out" }, "-=1.0")
         .to(".couple-names", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }, "-=1.1")
         .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 1.2, ease: "power3.out" }, "-=1.2")
         .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 1.0, ease: "power2.out" }, "-=1.0")
-        
-        .to(".scroll-indicator", { opacity: 1, duration: 1.0, ease: "sine.inOut" }, "+=0.1")
-        .to("#heroContainer", { y: -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, "+=0.1");
-
+        .to(".scroll-indicator", { opacity: 1, duration: 1.0, ease: "sine.inOut" }, "+=0.1");
 
     // --- CH2: LA ESENCIA (FADE REVEAL) ---
     
@@ -152,7 +157,7 @@ function initSPAAnimations() {
             y: 30, 
             opacity: 0, 
             duration: 1.2, 
-            stagger: 0.2, // Añade un ligero retraso entre líneas para mayor fluidez
+            stagger: 0.2, 
             ease: "power3.out"
         });
     });
@@ -163,18 +168,15 @@ function initSPAAnimations() {
         scrollTrigger: {
             trigger: "#chapter-2",
             start: "top top",
-            end: "+=150%",     // El usuario debe hacer un "scroll extra" del 150% de la pantalla para revelar la foto
-            scrub: 1,          // Scrubbing muy suave
+            end: "+=150%",     
+            scrub: 1,          
             pin: true
         }
     });
 
     ch2Tl
-        // Fase 1: El texto del manifiesto se eleva sutilmente y desaparece
         .to("#manifesto-content", { opacity: 0, y: -40, duration: 1 }, 0)
-        // Fase 2: El bloque de color sólido pierde opacidad, revelando la foto que está detrás
         .to("#solid-canvas", { opacity: 0, duration: 1.5 }, 0.5)
-        // Fase 3: La foto, que inició ligeramente más grande (1.1), se acomoda perfectamente (1.0)
         .to(".majestic-ethereal-photo", { scale: 1, duration: 2, ease: "sine.out" }, 0.5);
 
 
