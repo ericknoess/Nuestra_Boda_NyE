@@ -20,25 +20,11 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html.lenis, html.lenis body {
-    height: auto;
-}
-
-.lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-    overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-    pointer-events: none;
-}
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
 
 html {
     -webkit-text-size-adjust: 100%;
@@ -56,7 +42,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    perspective: 1600px;
+    /* FIX: Perspective removida del body para no destruir position: fixed */
     background-color: var(--bg-marfil);
     color: var(--carbon-suave);
     font-family: 'Montserrat', sans-serif;
@@ -71,18 +57,28 @@ body {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-    .chromatic-block, .ambient-glow, .scroll-indicator {
-        display: none !important;
-    }
+    .chromatic-block, .ambient-glow, .scroll-indicator { display: none !important; }
 }
 
 .font-display { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: normal; }
 .font-meta { font-family: 'Montserrat', sans-serif; font-weight: 400; text-transform: uppercase; }
 
-#app-container { width: 100%; position: relative; }
+/* FIX: Perspective trasladada al contenedor de la aplicación */
+#app-container { width: 100%; position: relative; perspective: 1600px; }
 
-/* GLOBAL UI */
-.loader-screen { position: fixed; inset: 0; background-color: var(--bg-marfil); z-index: 999; opacity: 1; transition: opacity 0.5s var(--ease-luxury); }
+/* GLOBAL UI & CEREMONIAL GATE */
+.loader-screen {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-marfil);
+    z-index: 9999;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .audio-ui-layer { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; pointer-events: auto; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
 .audio-ui-btn { background: transparent; border: none; color: var(--carbon-suave); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0.5rem; transition: opacity var(--transition-medium); opacity: 0.6; }
 .audio-ui-btn:hover, .audio-ui-btn:focus-visible { opacity: 1; outline: none; }
@@ -119,104 +115,15 @@ body {
 .manifesto-text span:last-child { margin-bottom: 0; }
 
 /* CH3 COORDENADAS */
-#chapter-3 {
-    position: relative;
-    width: 100%;
-    height: 450vh; 
-}
-
-.sticky-container {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.ethereal-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) sepia(20%) contrast(120%);
-    opacity: 0; 
-    z-index: 0;
-}
-
-.vignette-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(244,240,234,0.85) 0%, rgba(244,240,234,0.4) 40%, rgba(244,240,234,0.1) 100%);
-    z-index: 1;
-    pointer-events: none;
-}
-
-#chapter-3 .chapter-tag {
-    font-size: 0.65rem;
-    letter-spacing: 0.45em;
-    text-transform: uppercase;
-    color: var(--bronce-mate);
-    position: absolute;
-    top: 15%;
-    z-index: 10;
-}
-
-.monumental-text-container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-}
-
-.info-layer {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    text-shadow: 0 0 40px rgba(244, 240, 234, 1), 0 0 15px rgba(244, 240, 234, 0.8);
-}
-
-.date-display {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: clamp(3.5rem, 10vw, 7rem);
-    line-height: 1;
-    letter-spacing: 0.05em;
-    color: var(--carbon-suave);
-}
-
-.phase-tag {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--bronce-mate);
-    margin-bottom: 1rem;
-}
-
-.location-title {
-    font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(2.5rem, 6vw, 4rem); 
-    font-weight: 300;
-    color: var(--carbon-suave);
-    line-height: 1.2;
-}
-
+#chapter-3 { position: relative; width: 100%; height: 450vh; }
+.sticky-container { position: sticky; top: 0; width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+.ethereal-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) sepia(20%) contrast(120%); opacity: 0; z-index: 0; }
+.vignette-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(244,240,234,0.85) 0%, rgba(244,240,234,0.4) 40%, rgba(244,240,234,0.1) 100%); z-index: 1; pointer-events: none; }
+#chapter-3 .chapter-tag { font-size: 0.65rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--bronce-mate); position: absolute; top: 15%; z-index: 10; }
+.monumental-text-container { position: relative; z-index: 2; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.info-layer { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; text-shadow: 0 0 40px rgba(244, 240, 234, 1), 0 0 15px rgba(244, 240, 234, 0.8); }
+.date-display { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(3.5rem, 10vw, 7rem); line-height: 1; letter-spacing: 0.05em; color: var(--carbon-suave); }
+.phase-tag { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--bronce-mate); margin-bottom: 1rem; }
+.location-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 300; color: var(--carbon-suave); line-height: 1.2; }
 #layer-ceremonia { opacity: 0; transform: translateY(40px); }
 #layer-recepcion { opacity: 0; transform: translateY(40px); }

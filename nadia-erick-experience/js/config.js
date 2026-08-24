@@ -1,3 +1,4 @@
+// config.js
 /**
  * WEDDING EXPERIENCE - CENTRAL CONFIGURATION V3.20
  */
