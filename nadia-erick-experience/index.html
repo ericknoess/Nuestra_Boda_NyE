@@ -13,11 +13,12 @@
     
     <style>
        /* ============================================================================
-          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V3.83 (CRISP CLEAR LAYER V2)
+          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V4.0 (PROTOCOL & EPILOGUE)
           ============================================================================ */
        :root {
            --bg-marfil: #F4F0EA;       
            --bronce-mate: #A67C52;     
+           --bronce-luz: #C59B72;
            --carbon-suave: #1A1A1A;    
            --glow-color-Ch1: rgba(230, 198, 193, 0.45); 
            --drop-shadow-Ch1: drop-shadow(0 20px 40px rgba(107, 76, 45, 0.18));
@@ -76,7 +77,6 @@
        .audio-ui-layer { position: fixed; top: clamp(0.2rem, 2vw, 1rem); left: clamp(0.2rem, 2vw, 1rem); z-index: 100; pointer-events: none; opacity: 0; display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
        .audio-ui-layer.is-active { pointer-events: auto; }
        
-       /* Ampliación de target táctil para móviles */
        .audio-ui-btn { background: transparent; border: none; color: var(--carbon-suave); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: clamp(0.5rem, 2vw, 1rem); transition: opacity var(--transition-medium); opacity: 0.05; min-width: 44px; min-height: 44px; justify-content: center; }
        .audio-ui-btn:hover, .audio-ui-btn:focus-visible { opacity: 0.8; outline: none; }
        .audio-ui-btn:disabled { cursor: wait; opacity: 0.02; }
@@ -90,11 +90,9 @@
        .ambient-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: clamp(300px, 80vw, 720px); height: clamp(300px, 80vw, 720px); border-radius: 50%; background: radial-gradient(circle, var(--glow-color-Ch1) 0%, rgba(244, 240, 234, 0) 70%); pointer-events: none; filter: blur(55px); z-index: 1; }
        .hero-container { opacity: 0; position: relative; z-index: 2; width: 100%; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 0 1.5rem; }
        
-       /* Proporciones dinámicas para el contenedor del SVG */
        .identity-stage { position: relative; width: 100%; height: clamp(300px, 50vh, 420px); margin-bottom: clamp(1.5rem, 4vh, 2.2rem); display: flex; align-items: center; justify-content: center; filter: var(--drop-shadow-Ch1); z-index: 2; }
        #master-svg { width: 100%; height: 100%; display: block; overflow: visible; shape-rendering: geometricPrecision; }
 
-       /* Tipografía fluida responsiva */
        .editorial-block { text-align: center; display: flex; flex-direction: column; align-items: center; pointer-events: none; width: 100%; }
        .chapter-tag { color: var(--bronce-mate); font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.45em; margin-bottom: 0.8rem; opacity: 0; transform: translateY(12px); }
        .couple-names { font-size: clamp(2.4rem, 8vw, 3.4rem); line-height: 1.05; letter-spacing: 0.03em; color: var(--carbon-suave); margin-bottom: 0.9rem; opacity: 0; transform: translateY(20px); }
@@ -107,7 +105,6 @@
        #chapter-2 { position: relative; width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: var(--bg-marfil); padding: clamp(4rem, 10vh, 6rem) 1.5rem; z-index: 2; }
        .majestic-photo-layer { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
        
-       /* CAMBIO: Se redujo la opacidad y se incrementó el brillo para aclarar la imagen sin desenfocarla */
        .majestic-ethereal-photo { 
            width: 100%; 
            height: 100%; 
@@ -138,6 +135,112 @@
        .location-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 6vw, 4rem); font-weight: 300; color: var(--carbon-suave); line-height: 1.2; }
        #layer-ceremonia { opacity: 0; transform: translateY(40px); }
        #layer-recepcion { opacity: 0; transform: translateY(40px); }
+
+       /* ============================================================================
+          CAPÍTULO IV: EL PROTOCOLO (LOGÍSTICA Y RSVP)
+          ============================================================================ */
+       .protocol-section {
+           position: relative;
+           width: 100%;
+           background-color: var(--bg-marfil);
+           padding: 8rem 2rem 4rem 2rem;
+           z-index: 2;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+       }
+
+       .protocol-container {
+           width: 100%;
+           max-width: 600px;
+           text-align: center;
+           display: flex;
+           flex-direction: column;
+           gap: 6rem; /* Espaciado de ultra lujo entre bloques */
+       }
+
+       .protocol-block {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           gap: 1.5rem;
+       }
+
+       .protocol-title {
+           font-size: clamp(2rem, 5vw, 3rem);
+           color: var(--bronce-mate);
+           line-height: 1.2;
+       }
+
+       .protocol-text {
+           font-family: 'Montserrat', sans-serif;
+           font-size: 0.9rem;
+           line-height: 1.8;
+           color: var(--carbon-suave);
+           font-weight: 300;
+       }
+
+       .protocol-detail {
+           font-size: 0.75rem;
+           letter-spacing: 0.35em;
+           color: var(--carbon-suave);
+           text-transform: uppercase;
+       }
+
+       /* Botón de WhatsApp Concierge */
+       .rsvp-btn {
+           margin-top: 1.5rem;
+           display: inline-block;
+           background: transparent;
+           border: 1px solid rgba(166,124,82,0.4);
+           padding: 1rem 3rem;
+           font-size: 0.75rem;
+           letter-spacing: 0.4em;
+           text-transform: uppercase;
+           color: var(--bronce-mate);
+           text-decoration: none;
+           transition: all 0.4s ease;
+           cursor: pointer;
+       }
+
+       .rsvp-btn:hover {
+           background-color: var(--bronce-mate);
+           color: var(--bg-marfil);
+       }
+
+       /* ============================================================================
+          CAPÍTULO V: EL EPÍLOGO (CIERRE EMOCIONAL)
+          ============================================================================ */
+       .epilogue-section {
+           position: relative;
+           width: 100%;
+           min-height: 70vh;
+           background-color: var(--bg-marfil);
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           z-index: 2;
+           overflow: hidden;
+           padding: 4rem 2rem;
+       }
+
+       .epilogue-initials {
+           font-size: clamp(8rem, 20vw, 16rem);
+           color: var(--bronce-luz);
+           opacity: 0.15; /* Sutil como una marca de agua */
+           line-height: 1;
+           margin-bottom: 2rem;
+       }
+
+       .epilogue-phrase {
+           font-size: clamp(1.4rem, 4vw, 2.2rem);
+           color: var(--carbon-suave);
+           font-style: italic;
+           position: absolute;
+           top: 50%;
+           transform: translateY(-50%);
+       }
     </style>
     
     <script>document.documentElement.classList.remove('no-js');</script>
@@ -208,7 +311,7 @@
                   <div class="line-separator" aria-hidden="true"></div>
                 </div>
 
-                <div class="scroll-indicator font-meta">Deslizar</div>
+                <div class="scroll-indicator font-meta">Deslizar Suavemente</div>
 
             </section>
         </main>
@@ -223,7 +326,7 @@
             <div class="content-layer-essence-fog" id="manifesto-content">
                 <div class="chapter-tag-essence font-meta">Capítulo II &bull; La Esencia</div>
                 <div class="manifesto-text font-display" id="text-trigger-2">
-                    <span class="fade-line-2">El amor más verdadero es aquel que trae paz y equilibrio al alma.</span>
+                    <span class="fade-line-2">El amor verdadero es aquel que trae paz y equilibrio al alma.</span>
                     <span class="fade-line-2">Somos dos fuerzas distintas que descubrieron su balance perfecto; eligiendo la empatía, la ternura y la comprensión todos los días.</span>
                     <span class="fade-line-2">Y con esa misma luz, caminamos juntos hacia nuestro futuro.</span>
                 </div>
@@ -232,29 +335,76 @@
 
         <!-- CAPÍTULO III: COORDENADAS -->
         <section id="chapter-3">
-            <div class="sticky-container">
-              <img src="iglesia.jpeg" alt="Iglesia" class="ethereal-bg" id="bg-iglesia">
-              <img src="jardin.jpeg" alt="Jardín" class="ethereal-bg" id="bg-jardin">
-              <div class="vignette-overlay"></div>
+          <div class="sticky-container">
+            
+            <img src="iglesia.jpeg" alt="Iglesia" class="ethereal-bg" id="bg-iglesia">
+            <img src="jardin.jpeg" alt="Jardín" class="ethereal-bg" id="bg-jardin">
+            <div class="vignette-overlay"></div>
 
-              <div class="chapter-tag" id="ch-tag">Capítulo III &bull; Coordenadas</div>
+            <div class="chapter-tag" id="ch-tag">Capítulo III &bull; Coordenadas</div>
 
-              <div class="monumental-text-container">
-                <div class="info-layer" id="layer-fecha">
-                  <div class="date-display">21 . 11 . 2026</div>
-                </div>
-                <div class="info-layer" id="layer-ceremonia">
-                  <div class="phase-tag">La Ceremonia</div>
-                  <div class="location-title">Iglesia Principal</div>
-                  <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Ixtapan de la Sal</div>
-                </div>
-                <div class="info-layer" id="layer-recepcion">
-                  <div class="phase-tag">La Celebración</div>
-                  <div class="location-title">Finca El Encanto</div>
-                  <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Recepción y Banquete</div>
-                </div>
+            <div class="monumental-text-container">
+              
+              <!-- Capa 1: Fecha -->
+              <div class="info-layer" id="layer-fecha">
+                <div class="date-display">21 . nov . 2026</div>
               </div>
+
+              <!-- Capa 2: Ceremonia -->
+              <div class="info-layer" id="layer-ceremonia">
+                <div class="phase-tag">La Ceremonia &bull; 2:30 PM</div>
+                <div class="location-title">Parroquia de la Asunción de María</div>
+                <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Ixtapan de la Sal</div>
+              </div>
+
+              <!-- Capa 3: Recepción -->
+              <div class="info-layer" id="layer-recepcion">
+                <div class="phase-tag">La Celebración &bull; 3:30 PM</div>
+                <div class="location-title">Finca El Encanto</div>
+                <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Recepción y Banquete</div>
+              </div>
+
             </div>
+          </div>
+      </section>
+
+        <!-- ==================================================================== -->
+        <!-- CAPÍTULO IV: EL PROTOCOLO (LOGÍSTICA Y RSVP)                         -->
+        <!-- ==================================================================== -->
+        <section id="chapter-4" class="protocol-section" aria-label="El Protocolo">
+            <div class="protocol-container">
+                
+                <div class="chapter-tag font-meta" style="opacity: 1; transform: none; margin-bottom: 2rem;">Capítulo IV &bull; Protocolo</div>
+
+                <!-- Bloque 1: Dress Code -->
+                <div class="protocol-block">
+                    <h3 class="protocol-title font-display">Código de Vestimenta</h3>
+                    <p class="protocol-detail font-meta">Formal</p>
+                </div>
+
+                <!-- Bloque 2: Mesa de Regalos -->
+                <div class="protocol-block">
+                    <h3 class="protocol-title font-display">Mesa de Regalos</h3>
+                    <p class="protocol-text">Su presencia en este día es nuestro mayor regalo.<br>Si desean tener un detalle con nosotros, contaremos con un buzón físico en la recepción, o pueden visitar nuestra mesa en Liverpool.</p>
+                    <p class="protocol-detail font-meta" style="margin-top: 0.5rem;">Evento Núm: 60031358]</p>
+                </div>
+
+                <!-- Bloque 3: Confirmación (WhatsApp Concierge) -->
+                <div class="protocol-block rsvp-block">
+                    <h3 class="protocol-title font-display">Confirmación de Asistencia</h3>
+                    <p class="protocol-text">Agradecemos profundamente confirmar su presencia antes del 30 de octubre.</p>
+                    <a href="https://wa.me/7224067054?text=¡Hola!%20Confirmo%20con%20mucha%20emoción%20mi%20asistencia%20a%20la%20boda%20de%20Nadia%20y%20Erick.%20Mi%20nombre%20es:%20" target="_blank" class="rsvp-btn font-meta">Confirmar Asistencia</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================================================================== -->
+        <!-- CAPÍTULO V: EL EPÍLOGO (CIERRE EMOCIONAL)                            -->
+        <!-- ==================================================================== -->
+        <section id="epilogue" class="epilogue-section" aria-label="Cierre">
+            <h1 class="epilogue-initials font-display">N &amp; E</h1>
+            <p class="epilogue-phrase font-display">Nos vemos en Ixtapan de la Sal.</p>
         </section>
 
     </div> 

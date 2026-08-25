@@ -133,7 +133,7 @@ body {
 .couple-names { font-size: 3.4rem; line-height: 1.05; letter-spacing: 0.03em; color: var(--carbon-suave); margin-bottom: 0.9rem; opacity: 0; transform: translateY(20px); }
 .wedding-meta { font-size: 0.72rem; letter-spacing: 0.35em; color: var(--carbon-suave); opacity: 0; transform: translateY(12px); }
 .line-separator { width: 40px; height: 1px; background: var(--bronce-mate); margin: 1.2rem auto 0; opacity: 0; transform: scaleX(0); transform-origin: center; }
-.scroll-indicator { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); font-size: 0.6rem; letter-spacing: 0.4em; color: var(--bronce-mate); z-index: 10; opacity: 0; animation: pulse 2.5s infinite; }
+.scroll-indicator { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); font-size: 0.6rem; letter-spacing: 0.4em; color: var(--bronce-sombra); z-index: 10; opacity: 0; animation: pulse 2.5s infinite; }
 @keyframes pulse { 0% { opacity: 0.3; transform: translateX(-50%) translateY(0); } 50% { opacity: 0.7; transform: translateX(-50%) translateY(6px); } 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); } }
 
 /* CH2: FADE REVEAL CREADO EXACTO AL REQUERIMIENTO */
