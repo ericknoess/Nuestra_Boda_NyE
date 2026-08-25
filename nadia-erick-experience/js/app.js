@@ -1,11 +1,18 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V4.3 (RESPONSIVE + FINAL PARALLAX)
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V4.4 (MASTER PRODUCTION)
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
 import weddingConfig from './config.js';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// =========================================
+// 0.1 ESTABILIZACIÓN MÓVIL (ORIENTATION FIX)
+// =========================================
+ScrollTrigger.config({ 
+    ignoreMobileResize: true 
+});
 
 // =========================================
 // 0.5 MOTOR DE INERCIA Y SCROLL SUAVE (LENIS)
@@ -15,6 +22,15 @@ const lenis = new Lenis({
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
     smooth: true,
     smoothTouch: false  
+});
+
+// Re-cálculo arquitectónico seguro para giros físicos de pantalla
+window.addEventListener("orientationchange", () => {
+    lenis.stop();
+    setTimeout(() => {
+        ScrollTrigger.refresh();
+        lenis.start();
+    }, 500);
 });
 
 window.scrollTo(0, 0);
@@ -169,7 +185,7 @@ function initSPAAnimations() {
             .to(".majestic-ethereal-photo", { scale: 1, duration: 2, ease: "sine.out" }, 0.5);
 
 
-        // --- CH3: COORDENADAS ---
+        // --- CH3: COORDENADAS (UBICACIÓN) ---
         const ch3Tl = gsap.timeline({
             scrollTrigger: { trigger: "#chapter-3", start: "top top", end: "bottom bottom", scrub: 1.5 }
         });

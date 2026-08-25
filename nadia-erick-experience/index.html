@@ -13,12 +13,13 @@
     
     <style>
        /* ============================================================================
-          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V4.3 (USER DATA + FINAL CLOSURE)
+          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V4.4 (MASTER PRODUCTION)
           ============================================================================ */
        :root {
            --bg-marfil: #F4F0EA;       
            --bronce-mate: #A67C52;     
            --bronce-luz: #C59B72;
+           --bronce-sombra: #5E3F20;
            --carbon-suave: #1A1A1A;    
            --glow-color-Ch1: rgba(230, 198, 193, 0.45); 
            --drop-shadow-Ch1: drop-shadow(0 20px 40px rgba(107, 76, 45, 0.18));
@@ -98,8 +99,25 @@
        .couple-names { font-size: clamp(2.4rem, 8vw, 3.4rem); line-height: 1.05; letter-spacing: 0.03em; color: var(--carbon-suave); margin-bottom: 0.9rem; opacity: 0; transform: translateY(20px); }
        .wedding-meta { font-size: clamp(0.55rem, 2.5vw, 0.72rem); letter-spacing: 0.35em; color: var(--carbon-suave); opacity: 0; transform: translateY(12px); }
        .line-separator { width: 40px; height: 1px; background: var(--bronce-mate); margin: clamp(1rem, 3vh, 1.2rem) auto 0; opacity: 0; transform: scaleX(0); transform-origin: center; }
-       .scroll-indicator { position: absolute; bottom: clamp(1.5rem, 5vh, 3rem); left: 50%; transform: translateX(-50%); font-size: 0.6rem; letter-spacing: 0.4em; color: var(--bronce-mate); z-index: 10; opacity: 0; animation: pulse 2.5s infinite; }
-       @keyframes pulse { 0% { opacity: 0.3; transform: translateX(-50%) translateY(0); } 50% { opacity: 0.7; transform: translateX(-50%) translateY(6px); } 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); } }
+       
+       .scroll-indicator { 
+           position: absolute; 
+           bottom: clamp(1.5rem, 5vh, 3rem); 
+           left: 50%; 
+           transform: translateX(-50%); 
+           font-size: clamp(0.65rem, 2vw, 0.75rem); 
+           font-weight: 500;
+           letter-spacing: 0.4em; 
+           color: var(--bronce-sombra); 
+           z-index: 10; 
+           opacity: 0; 
+           animation: pulse 2.5s infinite; 
+       }
+       @keyframes pulse { 
+           0% { opacity: 0.4; transform: translateX(-50%) translateY(0); } 
+           50% { opacity: 0.95; transform: translateX(-50%) translateY(6px); } 
+           100% { opacity: 0.4; transform: translateX(-50%) translateY(0); } 
+       }
 
        /* CH2: LA ESENCIA */
        #chapter-2 { position: relative; width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: var(--bg-marfil); padding: clamp(4rem, 10vh, 6rem) 1.5rem; z-index: 2; }
@@ -122,7 +140,7 @@
        .manifesto-text span { display: block; margin-bottom: clamp(1.5rem, 4vh, 2.5rem); }
        .manifesto-text span:last-child { margin-bottom: 0; }
 
-       /* CH3 COORDENADAS */
+       /* CH3 COORDENADAS (UBICACIÓN) */
        #chapter-3 { position: relative; width: 100%; height: 450vh; }
        .sticky-container { position: sticky; top: 0; width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding: 0 1rem; }
        .ethereal-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) sepia(20%) contrast(120%); opacity: 0; z-index: 0; }
@@ -247,7 +265,6 @@
        .floral-closure-section {
            position: relative;
            width: 100%;
-           /* CAMBIO: Se amplió la altura máxima para que la imagen se vea más grande y majestuosa */
            height: clamp(400px, 65vh, 900px); 
            overflow: hidden;
            background-color: var(--bg-marfil);
@@ -258,7 +275,6 @@
            width: 100%;
            height: 130%; 
            object-fit: cover;
-           /* CAMBIO: Exactamente la misma tonalidad (filtro y opacidad) que la imagen del manifiesto */
            filter: grayscale(100%) sepia(20%) contrast(110%) brightness(115%);
            opacity: 0.65;
            display: block;
@@ -356,7 +372,7 @@
             </div>
         </section>
 
-        <!-- CAPÍTULO III: COORDENADAS -->
+        <!-- CAPÍTULO III: COORDENADAS (UBICACIÓN) -->
         <section id="chapter-3">
           <div class="sticky-container">
             
@@ -416,7 +432,7 @@
                 <div class="protocol-block rsvp-block">
                     <h3 class="protocol-title font-display">Confirmación de Asistencia</h3>
                     <p class="protocol-text">Agradecemos profundamente confirmar su presencia antes del 30 de octubre.</p>
-                    <a href="https://wa.me/7224067054?text=¡Hola!%20Confirmo%20con%20mucha%20emoción%20mi%20asistencia%20a%20la%20boda%20de%20Nadia%20y%20Erick.%20Mi%20nombre%20es:%20" target="_blank" class="rsvp-btn font-meta">Confirmar Asistencia</a>
+                    <a href="https://wa.me/527224067054?text=¡Hola!%20Confirmo%20con%20mucha%20emoción%20mi%20asistencia%20a%20la%20boda%20de%20Nadia%20y%20Erick.%20Mi%20nombre%20es:%20" target="_blank" class="rsvp-btn font-meta">Confirmar Asistencia</a>
                 </div>
 
             </div>
