@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V3.80 (RESPONSIVE)
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V4.3 (RESPONSIVE + FINAL PARALLAX)
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -187,6 +187,24 @@ function initSPAAnimations() {
             .to("#layer-recepcion", { opacity: 0, y: -40, duration: 1 }, 8)
             .to("#bg-jardin", { opacity: 0, duration: 1 }, 8)
             .to("#ch-tag", { opacity: 0, duration: 1 }, 8);
+            
+        // --- CIERRE FLORAL (PARALLAX SUTIL) ---
+        const floralImage = document.querySelector(".floral-closure-photo");
+        if (floralImage) {
+            gsap.fromTo(floralImage, 
+                { y: "-15%" }, 
+                {
+                    y: "10%",  
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".floral-closure-section",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                }
+            );
+        }
             
     }); 
 }
