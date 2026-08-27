@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V4.4 (MASTER PRODUCTION)
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V4.5 (MOBILE STABILITY SHIELD)
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -8,8 +8,9 @@ import weddingConfig from './config.js';
 gsap.registerPlugin(ScrollTrigger);
 
 // =========================================
-// 0.1 ESTABILIZACIÓN MÓVIL (ORIENTATION FIX)
+// 0.1 ESTABILIZACIÓN MÓVIL Y RESIZE (SAFARI/CHROME FIX)
 // =========================================
+// Ignora los cambios de altura causados por la barra de URL del celular
 ScrollTrigger.config({ 
     ignoreMobileResize: true 
 });
@@ -24,13 +25,21 @@ const lenis = new Lenis({
     smoothTouch: false  
 });
 
-// Re-cálculo arquitectónico seguro para giros físicos de pantalla
-window.addEventListener("orientationchange", () => {
-    lenis.stop();
-    setTimeout(() => {
+// Escudo protector contra giros de pantalla y redimensionamientos
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
         ScrollTrigger.refresh();
-        lenis.start();
-    }, 500);
+    }, 300);
+});
+
+window.addEventListener("orientationchange", () => {
+    lenis.stop(); // Congela el scroll para evitar glitches visuales
+    setTimeout(() => {
+        ScrollTrigger.refresh(); // Fuerza a GSAP a recalcular las alturas del viewport girado
+        lenis.start(); // Libera el scroll de forma segura
+    }, 500); // 500ms garantizan que Safari/Chrome terminó de dibujar la pantalla
 });
 
 window.scrollTo(0, 0);
@@ -185,7 +194,7 @@ function initSPAAnimations() {
             .to(".majestic-ethereal-photo", { scale: 1, duration: 2, ease: "sine.out" }, 0.5);
 
 
-        // --- CH3: COORDENADAS (UBICACIÓN) ---
+        // --- CH3: COORDENADAS ---
         const ch3Tl = gsap.timeline({
             scrollTrigger: { trigger: "#chapter-3", start: "top top", end: "bottom bottom", scrub: 1.5 }
         });
