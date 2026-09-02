@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.6
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.7 (FULLSCREEN API ENABLED)
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -56,7 +56,7 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0, 0);
 
 // =========================================
-// 0. CEREMONIAL GATE (LOADER) & AUDIO CONTROL
+// 0. CEREMONIAL GATE (LOADER) & AUDIO / FULLSCREEN CONTROL
 // =========================================
 const enterBtn = document.getElementById('enter-experience');
 const audioTrack = document.getElementById('ambient-track');
@@ -68,6 +68,21 @@ let isAudioPlaying = false;
 
 if(enterBtn) {
     enterBtn.addEventListener('click', () => {
+        
+        // --- INYECCIÓN FULLSCREEN API (INMERSIÓN TOTAL) ---
+        try {
+            let docEl = document.documentElement;
+            if (docEl.requestFullscreen) {
+                docEl.requestFullscreen().catch(e => console.warn("Fullscreen API mitigado (iOS/Block)", e));
+            } else if (docEl.webkitRequestFullscreen) {
+                docEl.webkitRequestFullscreen();
+            } else if (docEl.msRequestFullscreen) {
+                docEl.msRequestFullscreen();
+            }
+        } catch (e) {
+            console.warn("Fullscreen API no disponible en este dispositivo");
+        }
+
         if(audioTrack && weddingConfig.audio.enabled) {
             audioTrack.volume = 0; 
             audioTrack.play().then(() => {
@@ -160,9 +175,9 @@ function initSPAAnimations() {
             .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 2.0, ease: "power3.out" }, 3.8)
             .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 2.0, ease: "power2.out" }, 4.2)
             
-            .to("#heroContainer", { y: isMobile ? -8 : -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 4.8)
-            .to(".scroll-indicator", { opacity: 0.95, duration: 1.5, ease: "power2.out" }, 5.0)
-            .to(".scroll-indicator", { y: 6, opacity: 0.4, duration: 1.25, repeat: -1, yoyo: true, ease: "sine.inOut" }, 5.2);
+            .to("#heroContainer", { y: isMobile ? -8 : -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 6.0)
+            .to(".scroll-indicator", { opacity: 0.95, duration: 1.5, ease: "power2.out" }, 6.2)
+            .to(".scroll-indicator", { y: 6, opacity: 0.4, duration: 1.25, repeat: -1, yoyo: true, ease: "sine.inOut" }, 7.7);
 
 
         // --- CH2: LA ESENCIA ---
