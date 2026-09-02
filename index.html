@@ -13,7 +13,7 @@
     
     <style>
        /* ============================================================================
-          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V5.2 (SCROLL FATIGUE FIX)
+          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V5.4 (BORDERLESS MAP BTN)
           ============================================================================ */
        :root {
            --bg-marfil: #F4F0EA;       
@@ -143,10 +143,8 @@
        .manifesto-text span:last-child { margin-bottom: 0; }
 
        /* CH3 COORDENADAS (UBICACIÓN) */
-       /* CAMBIO: Reducción global de altura para acelerar el recorrido */
        #chapter-3 { position: relative; width: 100%; height: 350vh; }
        
-       /* CAMBIO: Compresión extrema en celulares para eliminar la fatiga táctil */
        @media (max-width: 768px) {
            #chapter-3 { height: 250vh; }
        }
@@ -174,10 +172,40 @@
        
        .info-layer { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; text-shadow: 0 0 40px rgba(244, 240, 234, 1), 0 0 15px rgba(244, 240, 234, 0.8); }
        .date-display { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem, 10vw, 7rem); line-height: 1; letter-spacing: 0.05em; color: var(--carbon-suave); }
-       .phase-tag { font-family: 'Montserrat', sans-serif; font-size: clamp(0.6rem, 2vw, 0.75rem); letter-spacing: 0.35em; text-transform: uppercase; color: var(--bronce-mate); margin-bottom: 1rem; }
+       .phase-tag { font-family: 'Montserrat', sans-serif; font-size: clamp(0.6rem, 2vw, 0.75rem); letter-spacing: 0.35em; text-transform: uppercase; color: var(--bronce-mate); margin-bottom: 0.8rem; }
+       
+       .time-display {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: clamp(1.6rem, 4vw, 2.4rem);
+           font-style: italic;
+           color: var(--bronce-mate);
+           line-height: 1;
+           margin-bottom: 0.5rem;
+       }
+
        .location-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 6vw, 4rem); font-weight: 300; color: var(--carbon-suave); line-height: 1.2; }
        #layer-ceremonia { opacity: 0; transform: translateY(40px); }
        #layer-recepcion { opacity: 0; transform: translateY(40px); }
+
+       /* CAMBIO: Eliminación del borde para una estética tipográfica más limpia */
+       .map-btn {
+           margin-top: 1.8rem;
+           display: inline-block;
+           background: transparent;
+           border: none;
+           padding: 0.8rem 1rem;
+           font-size: 0.65rem;
+           letter-spacing: 0.35em;
+           text-transform: uppercase;
+           color: var(--bronce-mate);
+           text-decoration: none;
+           transition: opacity 0.4s var(--ease-luxury);
+           cursor: pointer;
+           pointer-events: auto; 
+       }
+       .map-btn:hover {
+           opacity: 0.6; /* Efecto sutil de opacidad en lugar de fondo sólido */
+       }
 
        /* ============================================================================
           CAPÍTULO IV: EL PROTOCOLO (LOGÍSTICA Y RSVP)
@@ -416,16 +444,20 @@
 
               <!-- Capa 2: Ceremonia -->
               <div class="info-layer" id="layer-ceremonia">
-                <div class="phase-tag">La Ceremonia &bull; 2:30 PM</div>
+                <div class="phase-tag">Ceremonia Religiosa</div>
+                <div class="time-display">2:30 PM</div>
                 <div class="location-title">Parroquia de la Asunción de María</div>
-                <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Ixtapan de la Sal</div>
+                <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 0.8rem;">Ixtapan de la Sal</div>
+                <a href="https://maps.app.goo.gl/JwcHphK6sM25u7Bx9" target="_blank" class="map-btn font-meta">Cómo llegar</a>
               </div>
 
               <!-- Capa 3: Recepción -->
               <div class="info-layer" id="layer-recepcion">
-                <div class="phase-tag">La Celebración &bull; 4:00 PM</div>
+                <div class="phase-tag">La Celebración</div>
+                <div class="time-display">4:00 PM</div>
                 <div class="location-title">Finca El Encanto</div>
-                <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 1rem;">Recepción y Banquete</div>
+                <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 0.8rem;">Recepción y Banquete</div>
+                <a href="https://maps.app.goo.gl/5Nz3mY8k1d7BHbim7" target="_blank" class="map-btn font-meta">Cómo llegar</a>
               </div>
 
             </div>

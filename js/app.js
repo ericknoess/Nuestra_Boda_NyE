@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.2 (SCROLL PACING FIX)
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.3 (CH3 PACING OPTIMIZATION)
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -194,12 +194,10 @@ function initSPAAnimations() {
 
 
         // --- CH3: COORDENADAS ---
-        // CAMBIO: Scrub optimizado de 1.5 a 1.0 para mayor inmediatez táctil
         const ch3Tl = gsap.timeline({
             scrollTrigger: { trigger: "#chapter-3", start: "top top", end: "bottom bottom", scrub: 1 }
         });
 
-        // CAMBIO: Tiempos "apretados" para eliminar los espacios muertos donde no pasaba nada visual
         ch3Tl
             .to("#bg-iglesia", { opacity: 0.25, duration: 1 }, 0)
             .to("#layer-fecha", { opacity: 0, y: -40, duration: 0.8 }, 0.8)
