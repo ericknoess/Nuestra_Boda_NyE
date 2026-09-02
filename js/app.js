@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.3 (CH3 PACING OPTIMIZATION)
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.6
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -160,9 +160,9 @@ function initSPAAnimations() {
             .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 2.0, ease: "power3.out" }, 3.8)
             .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 2.0, ease: "power2.out" }, 4.2)
             
-            .to("#heroContainer", { y: isMobile ? -8 : -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 6.0)
-            .to(".scroll-indicator", { opacity: 0.95, duration: 1.5, ease: "power2.out" }, 6.2)
-            .to(".scroll-indicator", { y: 6, opacity: 0.4, duration: 1.25, repeat: -1, yoyo: true, ease: "sine.inOut" }, 7.7);
+            .to("#heroContainer", { y: isMobile ? -8 : -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 4.8)
+            .to(".scroll-indicator", { opacity: 0.95, duration: 1.5, ease: "power2.out" }, 5.0)
+            .to(".scroll-indicator", { y: 6, opacity: 0.4, duration: 1.25, repeat: -1, yoyo: true, ease: "sine.inOut" }, 5.2);
 
 
         // --- CH2: LA ESENCIA ---
@@ -193,21 +193,37 @@ function initSPAAnimations() {
             .to(".majestic-ethereal-photo", { scale: 1, duration: 2.5, ease: "power1.inOut" }, 0);
 
 
+        // --- SECCIÓN 2B: FAMILIA Y PADRINOS ---
+        gsap.utils.toArray(".fade-family").forEach((element) => {
+            gsap.from(element, {
+                scrollTrigger: { trigger: element, start: "top 85%" },
+                y: 30, 
+                opacity: 0, 
+                duration: 1.2, 
+                ease: "power3.out"
+            });
+        });
+
+
         // --- CH3: COORDENADAS ---
         const ch3Tl = gsap.timeline({
             scrollTrigger: { trigger: "#chapter-3", start: "top top", end: "bottom bottom", scrub: 1 }
         });
 
         ch3Tl
-            .to("#bg-iglesia", { opacity: 0.25, duration: 1 }, 0)
+            .to("#bg-iglesia", { opacity: 0.38, duration: 1 }, 0)
             .to("#layer-fecha", { opacity: 0, y: -40, duration: 0.8 }, 0.8)
             .to("#layer-ceremonia", { opacity: 1, y: 0, duration: 0.8 }, 1.2)
             .to("#layer-ceremonia", { opacity: 0, y: -40, duration: 0.8 }, 3.2)
-            .to("#bg-iglesia", { opacity: 0, duration: 1 }, 3.2)
-            .to("#bg-jardin", { opacity: 0.25, duration: 1 }, 3.6)
+            
+            .to("#bg-iglesia", { opacity: 0, duration: 1.2 }, 3.2)
+            .to("#bg-jardin", { opacity: 0.38, duration: 1.2 }, 3.2)
+            
             .to("#layer-recepcion", { opacity: 1, y: 0, duration: 0.8 }, 4.0)
-            .to("#bg-iglesia", { scale: 1.05, duration: 4.2, ease: "none" }, 0)
-            .to("#bg-jardin", { scale: 1.05, duration: 3.5, ease: "none" }, 3.6)
+            
+            .to("#bg-iglesia", { scale: 1.08, duration: 4.4, ease: "none" }, 0)
+            .to("#bg-jardin", { scale: 1.08, duration: 4.1, ease: "none" }, 3.2)
+            
             .to("#layer-recepcion", { opacity: 0, y: -40, duration: 0.8 }, 6.5)
             .to("#bg-jardin", { opacity: 0, duration: 0.8 }, 6.5)
             .to("#ch-tag", { opacity: 0, duration: 0.8 }, 6.5);
