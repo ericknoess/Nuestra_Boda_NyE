@@ -13,7 +13,7 @@
     
     <style>
        /* ============================================================================
-          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V5.0 (MOBILE SHIELD FIX)
+          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V5.2 (SCROLL FATIGUE FIX)
           ============================================================================ */
        :root {
            --bg-marfil: #F4F0EA;       
@@ -46,8 +46,9 @@
            padding: 0;
            width: 100%;
            min-height: 100vh;
-           min-height: 100dvh; /* Estabilidad de altura en iOS */
-           overflow-x: clip;   /* FIX: Reemplaza a 'hidden' para no romper el position: sticky en Safari */
+           min-height: 100dvh; 
+           overflow-x: clip;   
+           overflow-y: auto;  
            -webkit-font-smoothing: antialiased;
            -moz-osx-font-smoothing: grayscale;
            text-rendering: optimizeLegibility;
@@ -78,9 +79,9 @@
        .audio-ui-layer { position: fixed; top: clamp(0.2rem, 2vw, 1rem); left: clamp(0.2rem, 2vw, 1rem); z-index: 100; pointer-events: none; opacity: 0; display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
        .audio-ui-layer.is-active { pointer-events: auto; }
        
-       .audio-ui-btn { background: transparent; border: none; color: var(--carbon-suave); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: clamp(0.5rem, 2vw, 1rem); transition: opacity var(--transition-medium); opacity: 0.05; min-width: 44px; min-height: 44px; justify-content: center; }
+       .audio-ui-btn { background: transparent; border: none; color: var(--carbon-suave); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: clamp(0.5rem, 2vw, 1rem); transition: opacity var(--transition-medium); opacity: 0.15; min-width: 44px; min-height: 44px; justify-content: center; }
        .audio-ui-btn:hover, .audio-ui-btn:focus-visible { opacity: 0.8; outline: none; }
-       .audio-ui-btn:disabled { cursor: wait; opacity: 0.02; }
+       .audio-ui-btn:disabled { cursor: wait; opacity: 0.05; }
        .audio-text { font-size: 0.5rem; letter-spacing: 0.35em; color: currentColor; }
        .audio-icon { width: clamp(1.1rem, 4vw, 1.3rem); height: clamp(1.1rem, 4vw, 1.3rem); color: currentColor; display: flex; align-items: center; justify-content: center; }
        .audio-icon svg { width: 100%; height: 100%; display: block; }
@@ -89,7 +90,7 @@
 
        /* CH1 HERO */
        .ambient-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: clamp(300px, 80vw, 720px); height: clamp(300px, 80vw, 720px); border-radius: 50%; background: radial-gradient(circle, var(--glow-color-Ch1) 0%, rgba(244, 240, 234, 0) 70%); pointer-events: none; filter: blur(55px); z-index: 1; }
-       .hero-container { opacity: 0; position: relative; z-index: 2; width: 100%; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; min-height: 100dvh; padding: 0 1.5rem; }
+       .hero-container { opacity: 0; position: relative; z-index: 2; width: 100%; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 0 1.5rem; }
        
        .identity-stage { position: relative; width: 100%; height: clamp(300px, 50vh, 420px); margin-bottom: clamp(1.5rem, 4vh, 2.2rem); display: flex; align-items: center; justify-content: center; filter: var(--drop-shadow-Ch1); z-index: 2; }
        #master-svg { width: 100%; height: 100%; display: block; overflow: visible; shape-rendering: geometricPrecision; }
@@ -100,24 +101,24 @@
        .wedding-meta { font-size: clamp(0.55rem, 2.5vw, 0.72rem); letter-spacing: 0.35em; color: var(--carbon-suave); opacity: 0; transform: translateY(12px); }
        .line-separator { width: 40px; height: 1px; background: var(--bronce-mate); margin: clamp(1rem, 3vh, 1.2rem) auto 0; opacity: 0; transform: scaleX(0); transform-origin: center; }
        
-       /* Contraste y peso devuelto al Scroll Indicator */
        .scroll-indicator { 
            position: absolute; 
-           bottom: clamp(1.5rem, 5vh, 3rem); 
+           bottom: clamp(2.5rem, 8vh, 4rem); 
            left: 50%; 
            transform: translateX(-50%); 
+           width: 100%;
+           text-align: center;
+           line-height: 1.6;
            font-size: clamp(0.65rem, 2vw, 0.75rem); 
            font-weight: 500;
            letter-spacing: 0.4em; 
            color: var(--bronce-sombra); 
            z-index: 10; 
            opacity: 0; 
-           animation: pulse 2.5s infinite; 
        }
-       @keyframes pulse { 
-           0% { opacity: 0.4; transform: translateX(-50%) translateY(0); } 
-           50% { opacity: 0.95; transform: translateX(-50%) translateY(6px); } 
-           100% { opacity: 0.4; transform: translateX(-50%) translateY(0); } 
+
+       @media (max-height: 600px) {
+           .scroll-indicator { display: none !important; }
        }
 
        /* CH2: LA ESENCIA */
@@ -142,15 +143,21 @@
        .manifesto-text span:last-child { margin-bottom: 0; }
 
        /* CH3 COORDENADAS (UBICACIÓN) */
-       #chapter-3 { position: relative; width: 100%; height: 450vh; }
+       /* CAMBIO: Reducción global de altura para acelerar el recorrido */
+       #chapter-3 { position: relative; width: 100%; height: 350vh; }
+       
+       /* CAMBIO: Compresión extrema en celulares para eliminar la fatiga táctil */
+       @media (max-width: 768px) {
+           #chapter-3 { height: 250vh; }
+       }
        
        .sticky-container { 
-           position: -webkit-sticky; /* FIX Safari */
+           position: -webkit-sticky; 
            position: sticky; 
            top: 0; 
            width: 100%; 
-           height: 100vh; /* Fallback */
-           height: 100dvh; /* FIX Mobile URL Bar Jumps */
+           height: 100vh; 
+           height: 100dvh; 
            display: flex; 
            flex-direction: column; 
            align-items: center; 
@@ -368,7 +375,7 @@
                   <div class="line-separator" aria-hidden="true"></div>
                 </div>
 
-                <div class="scroll-indicator font-meta">Deslizar Suavemente</div>
+                <div class="scroll-indicator font-meta">Deslizar<br>Suavemente</div>
 
             </section>
         </main>

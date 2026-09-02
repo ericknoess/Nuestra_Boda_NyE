@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V4.5 (MOBILE STABILITY SHIELD)
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.2 (SCROLL PACING FIX)
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -10,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
 // =========================================
 // 0.1 ESTABILIZACIÓN MÓVIL Y RESIZE (SAFARI/CHROME FIX)
 // =========================================
-// Ignora los cambios de altura causados por la barra de URL del celular
 ScrollTrigger.config({ 
     ignoreMobileResize: true 
 });
@@ -25,7 +24,6 @@ const lenis = new Lenis({
     smoothTouch: false  
 });
 
-// Escudo protector contra giros de pantalla y redimensionamientos
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
@@ -35,11 +33,11 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener("orientationchange", () => {
-    lenis.stop(); // Congela el scroll para evitar glitches visuales
+    lenis.stop(); 
     setTimeout(() => {
-        ScrollTrigger.refresh(); // Fuerza a GSAP a recalcular las alturas del viewport girado
-        lenis.start(); // Libera el scroll de forma segura
-    }, 500); // 500ms garantizan que Safari/Chrome terminó de dibujar la pantalla
+        ScrollTrigger.refresh(); 
+        lenis.start(); 
+    }, 500); 
 });
 
 window.scrollTo(0, 0);
@@ -134,7 +132,7 @@ function initSPAAnimations() {
 
         const svgInitialScale = isMobile ? 0.70 : 0.88;
         const scrollEndCh1 = isMobile ? "+=120%" : "+=150%";
-        const scrollEndCh2 = isMobile ? "+=220%" : "+=150%"; 
+        const scrollEndCh2 = isMobile ? "+=120%" : "+=100%"; 
 
         // --- CH1: EL UMBRAL ---
         const center = 500;
@@ -162,11 +160,12 @@ function initSPAAnimations() {
             .to(".wedding-meta", { opacity: 0.75, y: 0, duration: 2.0, ease: "power3.out" }, 3.8)
             .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 2.0, ease: "power2.out" }, 4.2)
             
-            .to(".scroll-indicator", { opacity: 1, duration: 1.5, ease: "sine.inOut" }, 6.0)
-            .to("#heroContainer", { y: isMobile ? -8 : -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 6.0);
+            .to("#heroContainer", { y: isMobile ? -8 : -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 6.0)
+            .to(".scroll-indicator", { opacity: 0.95, duration: 1.5, ease: "power2.out" }, 6.2)
+            .to(".scroll-indicator", { y: 6, opacity: 0.4, duration: 1.25, repeat: -1, yoyo: true, ease: "sine.inOut" }, 7.7);
 
 
-        // --- CH2: LA ESENCIA (FADE REVEAL CON PIN Y SCRUB) ---
+        // --- CH2: LA ESENCIA ---
         gsap.utils.toArray(".fade-line-2").forEach((line) => {
             gsap.from(line, {
                 scrollTrigger: { trigger: "#chapter-2", start: "top 70%" },
@@ -189,31 +188,33 @@ function initSPAAnimations() {
         });
 
         ch2Tl
-            .to("#manifesto-content", { opacity: 0, y: -40, duration: 1 }, 0)
-            .to("#solid-canvas", { opacity: 0, duration: 1.5 }, 0.5)
-            .to(".majestic-ethereal-photo", { scale: 1, duration: 2, ease: "sine.out" }, 0.5);
+            .to("#manifesto-content", { opacity: 0, y: -60, duration: 1, ease: "power2.in" }, 0)
+            .to("#solid-canvas", { opacity: 0, duration: 1.5, ease: "none" }, 0.5)
+            .to(".majestic-ethereal-photo", { scale: 1, duration: 2.5, ease: "power1.inOut" }, 0);
 
 
         // --- CH3: COORDENADAS ---
+        // CAMBIO: Scrub optimizado de 1.5 a 1.0 para mayor inmediatez táctil
         const ch3Tl = gsap.timeline({
-            scrollTrigger: { trigger: "#chapter-3", start: "top top", end: "bottom bottom", scrub: 1.5 }
+            scrollTrigger: { trigger: "#chapter-3", start: "top top", end: "bottom bottom", scrub: 1 }
         });
 
+        // CAMBIO: Tiempos "apretados" para eliminar los espacios muertos donde no pasaba nada visual
         ch3Tl
             .to("#bg-iglesia", { opacity: 0.25, duration: 1 }, 0)
-            .to("#layer-fecha", { opacity: 0, y: -40, duration: 1 }, 1)
-            .to("#layer-ceremonia", { opacity: 1, y: 0, duration: 1 }, 2)
-            .to("#layer-ceremonia", { opacity: 0, y: -40, duration: 1 }, 4)
-            .to("#bg-iglesia", { opacity: 0, duration: 1 }, 4)
-            .to("#bg-jardin", { opacity: 0.25, duration: 1 }, 5)
-            .to("#layer-recepcion", { opacity: 1, y: 0, duration: 1 }, 5.5)
-            .to("#bg-iglesia", { scale: 1.06, duration: 5, ease: "none" }, 0)
-            .to("#bg-jardin", { scale: 1.06, duration: 4.5, ease: "none" }, 5)
-            .to("#layer-recepcion", { opacity: 0, y: -40, duration: 1 }, 8)
-            .to("#bg-jardin", { opacity: 0, duration: 1 }, 8)
-            .to("#ch-tag", { opacity: 0, duration: 1 }, 8);
+            .to("#layer-fecha", { opacity: 0, y: -40, duration: 0.8 }, 0.8)
+            .to("#layer-ceremonia", { opacity: 1, y: 0, duration: 0.8 }, 1.2)
+            .to("#layer-ceremonia", { opacity: 0, y: -40, duration: 0.8 }, 3.2)
+            .to("#bg-iglesia", { opacity: 0, duration: 1 }, 3.2)
+            .to("#bg-jardin", { opacity: 0.25, duration: 1 }, 3.6)
+            .to("#layer-recepcion", { opacity: 1, y: 0, duration: 0.8 }, 4.0)
+            .to("#bg-iglesia", { scale: 1.05, duration: 4.2, ease: "none" }, 0)
+            .to("#bg-jardin", { scale: 1.05, duration: 3.5, ease: "none" }, 3.6)
+            .to("#layer-recepcion", { opacity: 0, y: -40, duration: 0.8 }, 6.5)
+            .to("#bg-jardin", { opacity: 0, duration: 0.8 }, 6.5)
+            .to("#ch-tag", { opacity: 0, duration: 0.8 }, 6.5);
             
-        // --- CIERRE FLORAL (PARALLAX SUTIL) ---
+        // --- CIERRE FLORAL ---
         const floralImage = document.querySelector(".floral-closure-photo");
         if (floralImage) {
             gsap.fromTo(floralImage, 
