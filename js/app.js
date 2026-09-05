@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.7 (FULLSCREEN API ENABLED)
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.8
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -176,8 +176,8 @@ function initSPAAnimations() {
             .to(".line-separator", { opacity: 0.6, scaleX: 1, duration: 2.0, ease: "power2.out" }, 4.2)
             
             .to("#heroContainer", { y: isMobile ? -8 : -12, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" }, 6.0)
-            .to(".scroll-indicator", { opacity: 0.95, duration: 1.5, ease: "power2.out" }, 6.2)
-            .to(".scroll-indicator", { y: 6, opacity: 0.4, duration: 1.25, repeat: -1, yoyo: true, ease: "sine.inOut" }, 7.7);
+            .to(".scroll-indicator", { opacity: 0.95, duration: 1.5, ease: "power2.out" }, 4.2)
+            .to(".scroll-indicator", { y: 6, opacity: 0.4, duration: 1.25, repeat: -1, yoyo: true, ease: "sine.inOut" }, 4.7);
 
 
         // --- CH2: LA ESENCIA ---

@@ -22,7 +22,7 @@
     
     <style>
        /* ============================================================================
-          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V5.7 (FULLSCREEN READY)
+          LUXURY WEDDING EXPERIENCE — CENTRAL STYLESHEET V5.9 (GALLERY ADDED)
           ============================================================================ */
        :root {
            --bg-marfil: #F4F0EA;       
@@ -350,7 +350,38 @@
        }
 
        /* ============================================================================
-          CAPÍTULO V: EL EPÍLOGO (CIERRE EMOCIONAL)
+          CAPÍTULO V: GALERÍA DE FOTOS (ZERO-FRICTION)
+          ============================================================================ */
+       .gallery-section {
+           position: relative;
+           width: 100%;
+           background-color: var(--bg-marfil);
+           padding: clamp(4rem, 10vh, 6rem) 1.5rem;
+           z-index: 2;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+       }
+
+       .gallery-container {
+           width: 100%;
+           max-width: 600px;
+           text-align: center;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           gap: 1.2rem;
+       }
+
+       .gallery-main-title {
+           font-size: clamp(2.2rem, 6vw, 3.5rem);
+           color: var(--bronce-mate);
+           line-height: 1.2;
+           margin-bottom: 0.5rem;
+       }
+
+       /* ============================================================================
+          CAPÍTULO VI: EL EPÍLOGO (CIERRE EMOCIONAL)
           ============================================================================ */
        .epilogue-section {
            position: relative;
@@ -545,16 +576,16 @@
               <!-- Capa 2: Ceremonia -->
               <div class="info-layer" id="layer-ceremonia">
                 <div class="phase-tag">Ceremonia Religiosa</div>
-                <div class="time-display">2:30 PM</div>
+                <div class="time-display">11:00 PM</div>
                 <div class="location-title">Parroquia de la Asunción de María</div>
                 <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 0.8rem;">Ixtapan de la Sal</div>
-                <a href="https://maps.app.goo.gl/JwcHphK6sM25u7Bx9" target="_blank" class="map-btn font-meta">Cómo llegar</a>
+                <a href="https://share.google/UbCHSaG0wicMChpou" target="_blank" class="map-btn font-meta">Cómo llegar</a>
               </div>
 
               <!-- Capa 3: Recepción -->
               <div class="info-layer" id="layer-recepcion">
                 <div class="phase-tag">La Celebración</div>
-                <div class="time-display">4:00 PM</div>
+                <div class="time-display">12:30 PM</div>
                 <div class="location-title">Finca El Encanto</div>
                 <div style="font-family: 'Montserrat', sans-serif; font-size: clamp(0.55rem, 2vw, 0.65rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--bronce-mate); margin-top: 0.8rem;">Recepción y Banquete</div>
                 <a href="https://maps.app.goo.gl/5Nz3mY8k1d7BHbim7" target="_blank" class="map-btn font-meta">Cómo llegar</a>
@@ -586,6 +617,7 @@
                     <h3 class="protocol-title font-display">Mesa de Regalos</h3>
                     <p class="protocol-text">Su presencia en este día es nuestro mayor regalo.<br>Si desean tener un detalle con nosotros, contaremos con un buzón físico en la recepción, o pueden visitar nuestra mesa de regalos en Liverpool.</p>
                     <p class="protocol-detail font-meta" style="margin-top: 0.5rem;">Evento Núm: 60031358</p>
+                    <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/60031358" target="_blank" class="map-btn font-meta" style="margin-top: 0.2rem;">Ver Mesa de Regalos</a>
                 </div>
 
                 <!-- Bloque 3: Confirmación (WhatsApp Concierge) -->
@@ -599,7 +631,23 @@
         </section>
 
         <!-- ==================================================================== -->
-        <!-- CAPÍTULO V: EL EPÍLOGO (CIERRE EMOCIONAL)                            -->
+        <!-- CAPÍTULO V: CAPTURA EL MOMENTO (GALERÍA ZERO-FRICTION)               -->
+        <!-- ==================================================================== -->
+        <section id="gallery-section" class="gallery-section" aria-label="Galería de Fotos">
+            <div class="gallery-container">
+                <div class="chapter-tag font-meta" style="opacity: 1; transform: none; margin-bottom: 2rem;">Capítulo V &bull; Memorias</div>
+                
+                <h2 class="gallery-main-title font-display fade-gallery">Captura el Momento</h2>
+                
+                <p class="gallery-text fade-gallery">Ayúdanos a inmortalizar nuestra celebración.<br>Comparte tus fotografías y videos en nuestro álbum digital compartido.</p>
+                
+                <!-- IMPORTANTE: Inserta el enlace de tu álbum de Google Photos o iCloud en el href -->
+                <a href="https://photos.app.goo.gl/vVC1wfmnhZBULLak8" target="_blank" class="map-btn font-meta fade-gallery" style="margin-top: 2rem;">Compartir mis fotos</a>
+            </div>
+        </section>
+
+        <!-- ==================================================================== -->
+        <!-- CAPÍTULO VI: EL EPÍLOGO (CIERRE EMOCIONAL)                            -->
         <!-- ==================================================================== -->
         <section id="epilogue" class="epilogue-section" aria-label="Cierre">
             <h1 class="epilogue-initials font-display">N &amp; E</h1>
