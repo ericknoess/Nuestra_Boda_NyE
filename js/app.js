@@ -1,5 +1,5 @@
 /**
- * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V5.8
+ * LUXURY WEDDING EXPERIENCE — CENTRAL ORCHESTRATOR V6.0
  * GSAP MOTION SYSTEM + LENIS SMOOTH SCROLL (Inertia Control)
  */
 
@@ -95,7 +95,9 @@ if(enterBtn) {
             }).catch(e => console.warn("Audio bloqueado por navegador", e));
         }
 
-        gsap.to(enterBtn, { opacity: 0, duration: 0.5 });
+        // CAMBIO: Desvanecemos de manera elegante el contenido antes de ocultar el fondo
+        gsap.to("#ceremonial-content", { opacity: 0, duration: 0.5 });
+        
         gsap.to(ceremonialGate, { 
             opacity: 0, 
             duration: 1.5, 
@@ -243,6 +245,19 @@ function initSPAAnimations() {
             .to("#bg-jardin", { opacity: 0, duration: 0.8 }, 6.5)
             .to("#ch-tag", { opacity: 0, duration: 0.8 }, 6.5);
             
+
+        // --- CAPÍTULO V: GALERÍA DE FOTOS ---
+        gsap.utils.toArray(".fade-gallery").forEach((element) => {
+            gsap.from(element, {
+                scrollTrigger: { trigger: element, start: "top 85%" },
+                y: 30, 
+                opacity: 0, 
+                duration: 1.2, 
+                ease: "power3.out"
+            });
+        });
+
+
         // --- CIERRE FLORAL ---
         const floralImage = document.querySelector(".floral-closure-photo");
         if (floralImage) {
